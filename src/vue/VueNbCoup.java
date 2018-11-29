@@ -15,4 +15,6 @@ public class VueNbCoup {
         label.setText(commande.exec()+"");
     }
 
+
+
 }
