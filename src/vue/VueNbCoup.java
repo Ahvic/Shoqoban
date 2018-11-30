@@ -8,7 +8,7 @@ public class VueNbCoup {
 
     public VueNbCoup(Controleur controleur) {
         this.controleur=controleur;
-        commande = controleur.commandeNbCoup();
+        Commande commande = controleur.commandeNbCoup();
     }
 
     public void dessine() {
