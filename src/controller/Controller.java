@@ -1,5 +1,7 @@
 package controller;
 
+import model.CommandeConcret;
+import model.Concepteur;
 import vue.Vue;
 
 public class Controller {
@@ -11,6 +13,10 @@ public class Controller {
     private static Vue vueJeu;
 
     private static Vue vueMenu;
+
+    private static Concepteur concepteur;
+
+    private static CommandeConcret commande;
 
     /*Constructeur privé*/
     private Controller(){
