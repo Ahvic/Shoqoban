@@ -10,25 +10,22 @@ import java.io.FileNotFoundException;
  */
 
 public enum ModelConcret implements Model{ //Tout les objets n'ayant pas d'animation
-    CAISSE("caisse.PNG"),
-    ESPACE_VIDE("espace_vide.PNG"),
-    MUR("mur.PNG"),
-    PLATEFORME("plateforme.PNG");
+    SOL(' '),
+    CAISSE('$'),
+    TROU('.'),
+    TROU_COMBL('*'),
+    MUR('#'),
+    JOUEUR('@');
 
-    /*à noter que le joueur ne fait pas partie de cette classe */
 
-    private Image sprite;
+    private char etat;
 
-    ModelConcret(String img) {
-        try {
-            this.sprite = new Image(new FileInputStream(img),80,80,false,false);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    ModelConcret(char etat) {
+        this.etat = etat;
     }
 
-    public Image getSprite(){
-        return this.sprite;
+    public char getEtat(){
+        return this.etat;
     }
 
 }
