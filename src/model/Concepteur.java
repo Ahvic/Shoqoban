@@ -8,7 +8,7 @@ import java.io.*;
 public class Concepteur {
 
 
-    private char[][] lectureFichier(String nomFichier){
+    public char[][] lectureFichier(String nomFichier){
 
         int largeur = 0;
         int hauteur = 0;

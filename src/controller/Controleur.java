@@ -2,17 +2,10 @@ package controller;
 
 import model.CommandeConcret;
 import model.Concepteur;
-import vue.Vue;
 
 public class Controleur {
 
     private static Controleur instance = null;
-
-    private static char tab_Etat[][];
-
-    private static Vue vueJeu;
-
-    private static Vue vueMenu;
 
     private static Concepteur concepteur;
 
@@ -20,7 +13,8 @@ public class Controleur {
 
     /*Constructeur privé*/
     private Controleur(){
-
+        Controleur.concepteur = new Concepteur();
+        Controleur.commande = new CommandeConcret();
     }
 
 
@@ -38,6 +32,7 @@ public class Controleur {
      * et attente d'une action pour actualiser la vue*/
 
     public void Jouer(){
+        char [][] tab_Etat = concepteur.lectureFichier("something.xsb");
 
     }
 
