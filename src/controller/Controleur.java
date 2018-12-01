@@ -20,7 +20,7 @@ public class Controleur {
 
     /*getInstance du singleton */
 
-    public Controleur getInstance() {
+    public static Controleur getInstance() {
         if(Controleur.instance == null){
             Controleur.instance = new Controleur();
         }
