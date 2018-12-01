@@ -4,9 +4,9 @@ import model.CommandeConcret;
 import model.Concepteur;
 import vue.Vue;
 
-public class Controller {
+public class Controleur {
 
-    private static Controller instance = null;
+    private static Controleur instance = null;
 
     private static char tab_Etat[][];
 
@@ -19,23 +19,23 @@ public class Controller {
     private static CommandeConcret commande;
 
     /*Constructeur privé*/
-    private Controller(){
+    private Controleur(){
 
     }
 
 
     /*getInstance du singleton */
 
-    public Controller getInstance() {
-        if(Controller.instance == null){
-            Controller.instance = new Controller();
+    public Controleur getInstance() {
+        if(Controleur.instance == null){
+            Controleur.instance = new Controleur();
         }
-        return Controller.instance;
+        return Controleur.instance;
     }
 
 
     /*récuperation du tableau, création de vueJeu, utilisation de la méthode afficher de vueJeu
-    * et attente d'une action pour actualiser la vue*/
+     * et attente d'une action pour actualiser la vue*/
 
     public void Jouer(){
 
