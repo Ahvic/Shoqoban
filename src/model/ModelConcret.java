@@ -4,13 +4,13 @@ package model;
  * Created by Calgaryz.
  */
 
-public enum ModelConcret implements Model{ //Tout les objets n'ayant pas d'animation
-    SOL(' '),
+public enum ModelConcret implements Model{
     CAISSE('$'),
-    TROU('.'),
-    TROU_COMBL('*'),
+    JOUEUR('@'),
     MUR('#'),
-    JOUEUR('@');
+    SOL(' '),
+    TROU('.'),
+    TROU_COMBL('*');
 
 
     private char etat;
@@ -19,7 +19,7 @@ public enum ModelConcret implements Model{ //Tout les objets n'ayant pas d'anima
         this.etat = etat;
     }
 
-    public char getEtat(){
+    public char getEtat() {
         return this.etat;
     }
 

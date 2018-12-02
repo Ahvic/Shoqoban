@@ -2,6 +2,7 @@ package controller;
 
 import model.CommandeConcret;
 import model.Concepteur;
+import model.ModelConcret;
 
 public class Controleur {
 
@@ -33,6 +34,11 @@ public class Controleur {
 
     public void Jouer(){
         char [][] tab_Etat = concepteur.lectureFichier("something.xsb");
+        /*VUE sera ici*/
+        CommandeConcret commande = new CommandeConcret();
+        /*tant qu'on a pas gagner, demander une commande"*/
+        commande.move();//opère une modification sur le tableau
+        /*actualiser la vue puis recommencer*/
 
     }
 
@@ -40,6 +46,10 @@ public class Controleur {
     /*création de vueMenu, affichage et attente d'une action*/
 
     public void Menu(){
+
+
+
+        Jouer();
 
     }
 

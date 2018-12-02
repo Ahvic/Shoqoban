@@ -20,12 +20,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         Controleur.getInstance().Menu();
-
-        /*test bouton ici*/
-
-        Controleur.getInstance().Jouer();
-
-
         launch(args);
     }
 }
