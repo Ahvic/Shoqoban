@@ -1,25 +1,32 @@
-import controller.Controleur;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.CommandeConcret;
+import model.Concepteur;
 
 public class Main extends Application {
-
-    // HELLO IM A TEST wesh alors
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
+    public static void main(String[] args) {
+        launch(args);
     }
 
+    @Override
+    public void start(Stage primaryStage) {
 
-    public static void main(String[] args) {
-        Controleur.getInstance().Menu();
-        launch(args);
+        primaryStage.setTitle("Hello World!");
+        StackPane root = new StackPane();
+
+        Scene principale = new Scene(root, 300, 250);
+        principale.setOnKeyPressed(e -> {
+
+            KeyCode kC = e.getCode();
+
+            //CommandeConcret c = new CommandeConcret();
+            //int[] f = c.directionJoueur(kC);
+        });
+
+        primaryStage.setScene(principale);
+        primaryStage.show();
     }
 }
