@@ -30,24 +30,25 @@ public class CommandeConcret implements Commande{
 
     public char[][] move(KeyCode c, char[][] tab){
         int[] dir = directionJoueur(c);
-        int[] coordJ = {-1,-1};
+        int xCoordJ = -1;
+        int yCoordJ = -1;
 
         for(int i = 0; i < tab[0].length; i++){
             for(int j = 0; j < tab[1].length; j++)
-                if(tab[i][j] == '@'){
-                    coordJ[0] = i;
-                    coordJ[1] = j;
+                if(tab[i][j] == '@' || tab[i][j] == '+'){
+                    xCoordJ = i;
+                    yCoordJ = j;
                 }
         }
 
-        int[] voulu = {coordJ[0] + dir[0], coordJ[1] + dir[1]};
+        int[] voulu = {xCoordJ + dir[0], yCoordJ + dir[1]};
 
-        //System.out.println(coordJ[0] + " " + coordJ[1]);
-        //System.out.println(voulu[0] + " " + voulu[1]);
+        System.out.println(xCoordJ + " " + yCoordJ);
+        System.out.println(voulu[0] + " " + voulu[1] + " " + dir[0] + " " + dir[1]);
 
         if(tab[voulu[0]][voulu[1]] == ' '){
-            tab[coordJ[0]][coordJ[1]] = ' ';
-            tab[voulu[1]][voulu[0]] = '@';
+            tab[xCoordJ][yCoordJ] = ' ';
+            tab[voulu[0]][voulu[1]] = '@';
         }
 
         return tab;
@@ -57,7 +58,7 @@ public class CommandeConcret implements Commande{
      * Utilise dans move
      *
      * @param c la touche qui doit etre une fleche
-     * @return 1e element represente le mouvmeent en x, le second en y
+     * @return 1e element represente le mouvmeent en y, le second en x
      */
 
     public int[] directionJoueur(KeyCode c){
@@ -67,16 +68,16 @@ public class CommandeConcret implements Commande{
         if(c.isArrowKey()) {
             switch (c.getName()) {
                 case "Left":
-                    res[0] = -1;
-                    break;
-                case "Right":
-                    res[0] = 1;
-                    break;
-                case "Up":
                     res[1] = -1;
                     break;
-                case "Down":
+                case "Right":
                     res[1] = 1;
+                    break;
+                case "Up":
+                    res[0] = -1;
+                    break;
+                case "Down":
+                    res[0] = 1;
                     break;
             }
         }

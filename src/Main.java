@@ -1,32 +1,22 @@
-import javafx.application.Application;
 import javafx.scene.input.KeyCode;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import model.CommandeConcret;
 import model.Concepteur;
+import model.CommandeConcret;
 
-public class Main extends Application {
+public class Main {
     public static void main(String[] args) {
-        launch(args);
-    }
 
-    @Override
-    public void start(Stage primaryStage) {
+        Concepteur c = new Concepteur();
+        char[][] tab = c.lectureFichier("C:\\Users\\Antoi\\IdeaProjects\\Shoqoban\\Test\\Level1.xsb");
 
-        primaryStage.setTitle("Hello World!");
-        StackPane root = new StackPane();
+        KeyCode k = KeyCode.valueOf("RIGHT");
 
-        Scene principale = new Scene(root, 300, 250);
-        principale.setOnKeyPressed(e -> {
+        CommandeConcret CC = new CommandeConcret();
+        tab = CC.move(k,tab);
 
-            KeyCode kC = e.getCode();
-
-            //CommandeConcret c = new CommandeConcret();
-            //int[] f = c.directionJoueur(kC);
-        });
-
-        primaryStage.setScene(principale);
-        primaryStage.show();
+        for(int i = 0; i < tab[0].length; i++){
+            for(int j = 0; j < tab[1].length; j++)
+                System.out.print(tab[i][j]);
+            System.out.println();
+        }
     }
 }
