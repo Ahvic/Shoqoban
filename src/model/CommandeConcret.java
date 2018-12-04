@@ -9,32 +9,13 @@ public class CommandeConcret implements Commande{
 
     }
 
-    /*
-    * Que faire si il n'y a pas de @ ?
-    *
-    * Gere collision
-    * Deplacement
-    *
-    * Direction sous forme de fleche du clavier 👍
-    * Tableau rectangulaire                     👍
-    * L'espace de jeue st entoure de mur
-    * Gestion des caisses vérif si mouvement possible
-    *
-    * On peut enlever une caisse qui etait sur le goal
-    *
-    * Test unitaire avec appel concepteur
-    *
-    * @param Direction (KeyCode), tableau(char[][])
-    * @return tableau
-    */
-
     public char[][] move(KeyCode c, char[][] tab){
         int[] dir = directionJoueur(c);
         int xCoordJ = -1;
         int yCoordJ = -1;
 
-        for(int i = 0; i < tab[0].length; i++){
-            for(int j = 0; j < tab[1].length; j++)
+        for(int i = 0; i < tab.length; i++){
+            for(int j = 0; j < tab[0].length; j++)
                 if(tab[i][j] == '@' || tab[i][j] == '+'){
                     xCoordJ = i;
                     yCoordJ = j;
@@ -43,12 +24,85 @@ public class CommandeConcret implements Commande{
 
         int[] voulu = {xCoordJ + dir[0], yCoordJ + dir[1]};
 
-        System.out.println(xCoordJ + " " + yCoordJ);
-        System.out.println(voulu[0] + " " + voulu[1] + " " + dir[0] + " " + dir[1]);
+        //System.out.println(xCoordJ + " " + yCoordJ);
+        //System.out.println(voulu[0] + " " + voulu[1] + " " + dir[0] + " " + dir[1]);
 
         if(tab[voulu[0]][voulu[1]] == ' '){
-            tab[xCoordJ][yCoordJ] = ' ';
-            tab[voulu[0]][voulu[1]] = '@';
+            if (tab[xCoordJ][yCoordJ] == '@'){
+                tab[xCoordJ][yCoordJ] = ' ';
+                tab[voulu[0]][voulu[1]] = '@';
+            }
+
+            if (tab[xCoordJ][yCoordJ] == '+'){
+                tab[xCoordJ][yCoordJ] = '.';
+                tab[voulu[0]][voulu[1]] = '@';
+            }
+        }
+
+        if(tab[voulu[0]][voulu[1]] == '.'){
+            if (tab[xCoordJ][yCoordJ] == '@'){
+                tab[xCoordJ][yCoordJ] = ' ';
+                tab[voulu[0]][voulu[1]] = '+';
+            }
+
+            if (tab[xCoordJ][yCoordJ] == '+'){
+                tab[xCoordJ][yCoordJ] = '.';
+                tab[voulu[0]][voulu[1]] = '+';
+            }
+        }
+
+        if(tab[voulu[0]][voulu[1]] == '$'){
+
+            boolean aBouge = false;
+
+            if(tab[voulu[0] + dir[0]][voulu[1] + dir[1]] == ' ') {
+                tab[voulu[0] + dir[0]][voulu[1] + dir[1]] = '$';
+                aBouge = true;
+            }
+
+            if(tab[voulu[0] + dir[0]][voulu[1] + dir[1]] == '.') {
+                tab[voulu[0] + dir[0]][voulu[1] + dir[1]] = '*';
+                aBouge = true;
+            }
+
+            if(aBouge) {
+                if (tab[xCoordJ][yCoordJ] == '@') {
+                    tab[xCoordJ][yCoordJ] = ' ';
+                    tab[voulu[0]][voulu[1]] = '@';
+                }
+
+                if (tab[xCoordJ][yCoordJ] == '+') {
+                    tab[xCoordJ][yCoordJ] = '.';
+                    tab[voulu[0]][voulu[1]] = '@';
+                }
+            }
+        }
+
+        if(tab[voulu[0]][voulu[1]] == '*'){
+
+            boolean aBouge = false;
+
+            if(tab[voulu[0] + dir[0]][voulu[1] + dir[1]] == ' ') {
+                tab[voulu[0] + dir[0]][voulu[1] + dir[1]] = '$';
+                aBouge = true;
+            }
+
+            if(tab[voulu[0] + dir[0]][voulu[1] + dir[1]] == '.') {
+                tab[voulu[0] + dir[0]][voulu[1] + dir[1]] = '*';
+                aBouge = true;
+            }
+
+            if(aBouge) {
+                if (tab[xCoordJ][yCoordJ] == '@') {
+                    tab[xCoordJ][yCoordJ] = ' ';
+                    tab[voulu[0]][voulu[1]] = '+';
+                }
+
+                if (tab[xCoordJ][yCoordJ] == '+') {
+                    tab[xCoordJ][yCoordJ] = '.';
+                    tab[voulu[0]][voulu[1]] = '+';
+                }
+            }
         }
 
         return tab;
