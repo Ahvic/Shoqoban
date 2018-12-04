@@ -4,6 +4,7 @@ import javafx.scene.input.KeyCode;
 
 public class CommandeConcret implements Commande{
 
+    public char[][] tab;
 
     public CommandeConcret(){
 
