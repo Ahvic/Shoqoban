@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import model.Concepteur;
 
 import java.util.ArrayList;
 
@@ -14,22 +13,22 @@ public class Scene {
     int largeurScene = 800;
     int hauteurScene = 400;
 
-    public Concepteur setLargeur(int l){
+    public Scene setLargeur(int l){
         largeurScene=l;
         return this;
     }
 
-    public Concepteur setHauteur(int l) {
+    public Scene setHauteur(int l) {
         hauteurScene=l;
         return this;
     }
 
-    public Concepteur setCentre(Region node) {
+    public Scene setCentre(Region node) {
         centre = node;
         return this;
     }
 
-    public Concepteur ajoutBas(Region node) {
+    public Scene ajoutBas(Region node) {
         bas.add(node);
         return this;
     }

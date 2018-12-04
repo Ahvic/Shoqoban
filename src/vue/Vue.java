@@ -1,5 +1,6 @@
 package vue;
 
+import controller.Controleur;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,9 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 abstract class Vue {
-
-    Commande commande;
-    Button[] myButton;
+    Button[][] myButton;
     GridPane gridPane = new GridPane();
 
     Image [] jeu = new Image []{
@@ -19,28 +18,30 @@ abstract class Vue {
             new Image(new FileInputStream("48j.png"), 48, 48, false, false)
     };
 
-    public VueIHFX(Controleur controleur) throws FileNotFoundException{
-        commandeGetEtat = controleur.commandeGetEtat();
-        myButton = new Button[commandeGetEtat.exec().length];
-        for (int i=0;i<commandeGetEtat.exec().length;i++) {
-            myButton[i] = new Button();
-            myButton[i].setMinSize(32,32);
-            myButton[i].setMaxSize(48,48);
-            gridPane.add(myButton[i],i,0);
+    public void VueIHFX(char [][]etats) throws FileNotFoundException{
+        myButton = new Button[etats.length][etats[0].length];
+        for (int i=0;i<etats.length;i++) {
+            for(int j=0;j<etats[i].length;j++){
+                myButton[i][j] = new Button();
+                myButton[i][j].setMinSize(32,32);
+                myButton[i][j].setMaxSize(48,48);
+                gridPane.add(myButton[i][j],i,j);
+            }
+
         }
-        dessine();
+        dessine(etats);
     }
 
 
 
+    public void dessine(char [][] etats){
+        for (int i=0;i<etats.length;i++) {
+            for(int j=0;j<etats[i].length;j++){
+                for (VueObjets o : ) {
+                    if(etats[i][j]==c.getEtat())
 
-
-
-
-
-
-    public void dessine(){
-        for (int i=0; i<commandeGetEtat.exec().length;i++){
+                }
+            }
             myButton[i].setGraphic(new ImageView(jeu[commandeGetEtat.exec()[i]]));
         }
     }
