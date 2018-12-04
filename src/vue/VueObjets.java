@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /**
- * Ta doc ici
+ * Ta doc ici, ok
  */
 public enum VueObjets implements IObjet{
     CAISSE('$', "32j.gif"),
