@@ -1,40 +1,42 @@
-import javafx.scene.input.KeyCode;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import model.Concepteur;
-import model.CommandeConcret;
+import vue.VueJeu;
+import controller.Controleur;
+public class Main extends Application {
 
-public class Main extends Application{
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+    // HELLO IM A TEST wesh alors
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
-        StackPane root = new StackPane();
-        Scene principale = new Scene(root, 300, 250);
+    public void start(Stage primaryStage) throws Exception{
+        Controleur controleur = Controleur.getInstance();
 
-        Concepteur c = new Concepteur();
-        CommandeConcret CC = new CommandeConcret();
-        CC.tab = c.lectureFichier("C:\\Users\\Fixe\\Documents\\GitHub\\Shoqoban\\Test\\Level1.xsb");
+        char entrepot[][] = {{'#', '#', '#', '#', '#', '#', '#'},
+                {'#', '.', ' ', '$', ' ', '.', '#'},
+                {'#', ' ', '$', '@', '$', ' ', '#'},
+                {'#', '.', ' ', '$', ' ', '.', '#'},
+                {'#', '#', '#', '#', '#', '#', '#'}};
 
-        principale.setOnKeyPressed(e -> {
+        VueJeu vue = new VueJeu(entrepot);
+        vue.gridPane.setAlignment(Pos.CENTER);
 
-            KeyCode k = e.getCode();
-            CC.tab = CC.move(k,CC.tab);
+        /* montage de la scene */
 
-            for(int i = 0; i < CC.tab.length; i++){
-                for(int j = 0; j < CC.tab[0].length; j++)
-                    System.out.print(CC.tab[i][j]);
-                System.out.println();
-            }
-        });
+        vue = (VueJeu) vue.setCentre(vue.gridPane);
+        Scene scene =   vue.retourneScene();
 
-        primaryStage.setScene(principale);
+        primaryStage.setScene(scene);
+
+        primaryStage.setTitle("shoqoban");
         primaryStage.show();
+    }
+
+
+    public static void main(String[] args) {
+
+
+        Controleur.getInstance().Menu();
+        launch(args);
     }
 }

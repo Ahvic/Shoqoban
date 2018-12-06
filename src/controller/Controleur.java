@@ -40,7 +40,7 @@ public class Controleur {
         CommandeConcret commande = new CommandeConcret();
         /*tant qu'on a pas gagner, demander une commande"*/
 
-        tab_Etat = commande.move( , tab_Etat);//opère une modification sur le tableau
+        // tab_Etat = commande.move(, tab_Etat);//opère une modification sur le tableau
         /*actualiser la vue puis recommencer*/
 
     }
@@ -52,7 +52,7 @@ public class Controleur {
 
 
 
-        Jouer();
+         Jouer();
 
     }
 
