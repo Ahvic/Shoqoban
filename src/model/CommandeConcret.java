@@ -1,14 +1,19 @@
 package model;
-
 import javafx.scene.input.KeyCode;
 
 public class CommandeConcret implements Commande{
 
-    public char[][] tab;
 
     public CommandeConcret(){
 
     }
+
+    /**
+     *
+     * @param c le code de la touche appuye
+     * @param tab le tableau a modifier, doit se trouver hors du "main" de javafx
+     * @return le tableau modifie
+     */
 
     public char[][] move(KeyCode c, char[][] tab){
         int[] dir = directionJoueur(c);
@@ -110,13 +115,13 @@ public class CommandeConcret implements Commande{
     }
 
     /**
-     * Utilise dans move
+     * Utilise dans move, retourne la direction du mouvment au format [y,x]
      *
      * @param c la touche qui doit etre une fleche
-     * @return 1e element represente le mouvmeent en y, le second en x
+     * @return un tableau de taille 2, [y,x]
      */
 
-    public int[] directionJoueur(KeyCode c){
+    private int[] directionJoueur(KeyCode c){
 
         int[] res = {0,0};
 
@@ -139,4 +144,5 @@ public class CommandeConcret implements Commande{
 
         return res;
     }
+
 }

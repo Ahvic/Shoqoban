@@ -7,6 +7,6 @@ import javafx.scene.input.KeyCode;
  */
 public interface Commande {
 
-    public char[][] move(KeyCode c, char[][] tab);
+    char[][] move(KeyCode c, char[][] tab);
 
 }
