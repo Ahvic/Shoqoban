@@ -7,9 +7,6 @@ import javafx.scene.layout.GridPane;
 import java.io.FileNotFoundException;
 
 abstract class Vue {
-
     private GridPane principale;
-
-
 
 }

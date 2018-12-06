@@ -1,9 +1,14 @@
 package controller;
 
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import model.CommandeConcret;
 import model.Concepteur;
+import vue.BuilderVue;
+import vue.VueJeu;
+import vue.VueMenu;
 
 
 public class Controleur {
@@ -13,6 +18,13 @@ public class Controleur {
     private static Concepteur concepteur;
 
     private static CommandeConcret commande;
+
+    private static BuilderVue bld;
+
+    private static GridPane gridPane;
+
+    private char[][] tab_Etat;
+
 
     /*Constructeur privé*/
     private Controleur(){
@@ -34,25 +46,37 @@ public class Controleur {
     /*récuperation du tableau, création de vueJeu, utilisation de la méthode afficher de vueJeu
      * et attente d'une action pour actualiser la vue*/
 
-    private void Jouer(){
-        char[][] tab_Etat = concepteur.lectureFichier("something.xsb");
-        /*VUE sera ici*/
-        CommandeConcret commande = new CommandeConcret();
-        /*tant qu'on a pas gagner, demander une commande"*/
 
-        tab_Etat = commande.move( , tab_Etat);//opère une modification sur le tableau
-        /*actualiser la vue puis recommencer*/
+    public void Init(){
+
+        tab_Etat = concepteur.lectureFichier("something.xsb");
+        //VueJeu vue = (VueJeu) bld.getVue();
+        //gridPane = vue.getGridPane();
+        CommandeConcret commande = new CommandeConcret();
 
     }
 
 
-    /*création de vueMenu, affichage et attente d'une action*/
+
+    public void Jouer(KeyCode c){
+
+        tab_Etat = commande.move(c, tab_Etat);//opère une modification sur le tableau
+
+        /*actualiser la vue*/
+
+    }
+
+
+    /*création de vueMenu, affichage*/
 
     public void Menu(){
 
+    }
 
 
-        Jouer();
+
+    public GridPane getGridPane(){
+        return Controleur.gridPane;
 
     }
 
