@@ -11,11 +11,11 @@ import java.io.FileNotFoundException;
  */
 public class VueJeu extends Vue{
 
-    Button[][] myButton;
-    GridPane gridPane = new GridPane();
+    public Button[][] myButton;
+    public GridPane gridPane = new GridPane();
 
 
-    public void VueJeuIHFX(char [][]etats) throws FileNotFoundException {
+    public VueJeu(char [][]etats) {
         myButton = new Button[etats.length][etats[0].length];
         for (int i=0;i<etats.length;i++) {
             for(int j=0;j<etats[i].length;j++){
