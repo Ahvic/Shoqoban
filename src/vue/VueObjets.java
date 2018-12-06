@@ -13,12 +13,12 @@ import java.io.FileNotFoundException;
  * Ta doc ici, ok
  */
 public enum VueObjets implements IObjet{
-    CAISSE('$', "32j.gif"),
-    JOUEUR('@', "48j.png"),
-    MUR('#', "32j.gif"),
-    SOL(' ',"32j.gif"),
-    TROU('.',"32j.gif"),
-    TROU_COMBL('*', "32j.gif");
+    CAISSE('$', "ball.png"),
+    JOUEUR('@', "joueur.gif"),
+    MUR('#', "mur.png"),
+    SOL(' ',"sol.jpg"),
+    TROU('.',"trou.png"),
+    TROU_COMBL('*', "ball.png");
 
 
     private char etat;
