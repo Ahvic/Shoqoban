@@ -1,42 +1,37 @@
-import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import vue.VueJeu;
 import controller.Controleur;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+
 public class Main extends Application {
 
-    // HELLO IM A TEST wesh alors
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Controleur controleur = Controleur.getInstance();
-
-        char entrepot[][] = {{'#', '#', '#', '#', '#', '#', '#'},
-                {'#', '.', ' ', '$', ' ', '.', '#'},
-                {'#', ' ', '$', '@', '$', ' ', '#'},
-                {'#', '.', ' ', '$', ' ', '.', '#'},
-                {'#', '#', '#', '#', '#', '#', '#'}};
-
-        VueJeu vue = new VueJeu(entrepot);
-        vue.gridPane.setAlignment(Pos.CENTER);
-
-        /* montage de la scene */
-
-        vue = (VueJeu) vue.setCentre(vue.gridPane);
-        Scene scene =   vue.retourneScene();
-
-        primaryStage.setScene(scene);
-
-        primaryStage.setTitle("shoqoban");
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        primaryStage.setTitle("Shoqoban");
+        primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+        Controleur.getInstance().Init();
+
+        Controleur.getInstance().getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                KeyCode input = event.getCode();
+                Controleur.getInstance().Jouer(input);
+            }
+        });
+        Controleur.getInstance().getGridPane().requestFocus();
     }
 
 
-    public static void main(String[] args) {
-
-
-        Controleur.getInstance().Menu();
+    public static void main(String[] args)
+    {
         launch(args);
     }
 }
