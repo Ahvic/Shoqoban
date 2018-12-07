@@ -1,9 +1,8 @@
+import controller.Controleur;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import vue.VueJeu;
-import controller.Controleur;
 public class Main extends Application {
 
     // HELLO IM A TEST wesh alors
@@ -19,11 +18,11 @@ public class Main extends Application {
                 {'#', '#', '#', '#', '#', '#', '#'}};
 
         VueJeu vue = new VueJeu(entrepot);
-        vue.gridPane.setAlignment(Pos.CENTER);
+        vue.gridPaneCentre();
 
         /* montage de la scene */
 
-        vue = (VueJeu) vue.setCentre(vue.gridPane);
+        vue = (VueJeu) vue.setCentre(vue.getGridPane());
         Scene scene =   vue.retourneScene();
 
         primaryStage.setScene(scene);
