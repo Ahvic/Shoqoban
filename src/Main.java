@@ -1,37 +1,36 @@
-import controller.Controleur;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+import controller.Controleur;
 public class Main extends Application {
 
+    // HELLO IM A TEST wesh alors
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Controleur controleur = Controleur.getInstance();
+        GridPane gridPane = new GridPane();
+        primaryStage.setScene(new Scene(controleur.getGridPane(), 800, 400));
         primaryStage.setTitle("Shoqoban");
-        primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-        Controleur.getInstance().Init();
+        controleur.Init();
+        /*gridpane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-        Controleur.getInstance().getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
+
             public void handle(KeyEvent event) {
                 KeyCode input = event.getCode();
-                Controleur.getInstance().Jouer(input);
+                controleur.Jouer(input);
             }
         });
-        Controleur.getInstance().getGridPane().requestFocus();
+        controleur.getGridPane().requestFocus();*/
     }
 
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         launch(args);
     }
 }

@@ -1,9 +1,12 @@
 package controller;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import model.CommandeConcret;
 import model.Concepteur;
 import vue.BuilderVue;
@@ -23,7 +26,9 @@ public class Controleur {
 
     private static GridPane gridPane;
 
-    private char[][] tab_Etat;
+    private static char[][] tab_Etat;
+
+    private static VueJeu vuejeu;
 
 
     /*Constructeur privé*/
@@ -48,20 +53,17 @@ public class Controleur {
 
 
     public void Init(){
-
-        tab_Etat = concepteur.lectureFichier("something.xsb");
-        //VueJeu vue = (VueJeu) bld.getVue();
-        //gridPane = vue.getGridPane();
-        CommandeConcret commande = new CommandeConcret();
-
+        Controleur.tab_Etat = concepteur.lectureFichier("/home/calgary/IdeaProjects/Shoqoban/sokoban01.xsb");
+        System.out.println(tab_Etat[0][0]);
+        Controleur.vuejeu = new VueJeu(Controleur.tab_Etat);
+        vuejeu.dessine(tab_Etat);
     }
 
 
 
     public void Jouer(KeyCode c){
-
-        tab_Etat = commande.move(c, tab_Etat);//opère une modification sur le tableau
-
+        Controleur.tab_Etat = Controleur.commande.move(c, Controleur.tab_Etat);//opère une modification sur le tableau
+        Controleur.vuejeu.dessine(Controleur.tab_Etat);
         /*actualiser la vue*/
 
     }
@@ -70,13 +72,6 @@ public class Controleur {
     /*création de vueMenu, affichage*/
 
     public void Menu(){
-
-    }
-
-
-
-    public GridPane getGridPane(){
-        return Controleur.gridPane;
 
     }
 

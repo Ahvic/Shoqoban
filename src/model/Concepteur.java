@@ -32,15 +32,12 @@ public class Concepteur {
                     }
                     line = br.readLine();
                 }
-
                 br.close();
 
                 char[][] carte = new char[hauteur][largeur];
-
-                fr = new FileReader (f);
-                br = new BufferedReader (fr);
+                fr = new FileReader(f);
+                br = new BufferedReader(fr);
                 line = br.readLine();
-
                 int i = 0;
                 while (line != null)
                 {
