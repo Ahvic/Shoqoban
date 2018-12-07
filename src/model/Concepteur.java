@@ -35,7 +35,7 @@ public class Concepteur {
                 br.close();
 
                 char[][] carte = new char[hauteur][largeur];
-
+                fr = new FileReader(f);
                 br = new BufferedReader(fr);
                 line = br.readLine();
                 int i = 0;
