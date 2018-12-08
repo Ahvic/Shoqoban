@@ -45,4 +45,8 @@ public class VueJeu extends Vue{
 
         }
     }
+
+    public GridPane getGridPane(){
+        return this.gridPane;
+    }
 }

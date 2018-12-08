@@ -13,12 +13,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Controleur controleur = Controleur.getInstance();
-        GridPane gridPane = new GridPane();
+        controleur.Init();
         primaryStage.setScene(new Scene(controleur.getGridPane(), 800, 400));
         primaryStage.setTitle("Shoqoban");
         primaryStage.show();
-        controleur.Init();
-        /*gridpane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        controleur.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 
             public void handle(KeyEvent event) {
@@ -26,7 +25,7 @@ public class Main extends Application {
                 controleur.Jouer(input);
             }
         });
-        controleur.getGridPane().requestFocus();*/
+        controleur.getGridPane().requestFocus();
     }
 
 
