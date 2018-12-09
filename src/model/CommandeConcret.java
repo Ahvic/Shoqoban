@@ -1,11 +1,89 @@
 package model;
 import javafx.scene.input.KeyCode;
+import java.util.Stack;
 
 public class CommandeConcret implements Commande{
 
+    //TOUS LES ARGUMENTS DEMANDANT LE TABLEAU ET LA PILE SERONT DES APPELS A UNE VAR QUECPART
 
     public CommandeConcret(){
 
+    }
+
+    public char[][] undo(Stack<KeyCode> s, char[][] tab){
+
+        KeyCode lastKey = s.pop();
+
+        int[] JCVD = directionJoueur(lastKey);
+
+        int xCoordJ = -1;
+        int yCoordJ = -1;
+
+        for(int i = 0; i < tab.length; i++){
+            for(int j = 0; j < tab[0].length; j++)
+                if(tab[i][j] == '@' || tab[i][j] == '+'){
+                    xCoordJ = i;
+                    yCoordJ = j;
+                }
+        }
+
+        move(inversionTouche(lastKey), tab);
+
+        //Si on a pousse une caisse
+        char derLastDir = tab[xCoordJ + JCVD[0]][yCoordJ + JCVD[1]];
+
+        if(derLastDir == '$'){
+            if(tab[xCoordJ][yCoordJ] == ' ') tab[xCoordJ][yCoordJ] = '$';
+            if(tab[xCoordJ][yCoordJ] == '.') tab[xCoordJ][yCoordJ] = '*';
+
+            tab[xCoordJ + JCVD[0]][yCoordJ + JCVD[1]] = ' ';
+        }
+
+        if(derLastDir == '*'){
+            if(tab[xCoordJ][yCoordJ] == ' ') tab[xCoordJ][yCoordJ] = '$';
+            if(tab[xCoordJ][yCoordJ] == '.') tab[xCoordJ][yCoordJ] = '*';
+
+            tab[xCoordJ + JCVD[0]][yCoordJ + JCVD[1]] = '.';
+        }
+
+        return tab;
+    }
+
+    private KeyCode inversionTouche(KeyCode c){
+
+        if(c.isArrowKey()) {
+            switch (c.getName()) {
+                case "Left":
+                    return KeyCode.valueOf("RIGHT");
+                case "Right":
+                    return KeyCode.valueOf("LEFT");
+                case "Up":
+                    return KeyCode.valueOf("DOWN");
+                case "Down":
+                    return KeyCode.valueOf("UP");
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Verifie si la partie est termine en regardant si il
+     * reste une caisse sur le tableau
+     *
+     * @param tab
+     * @return vrai si fini, faux sinon
+     */
+
+    public boolean aGagner(char[][] tab){
+
+        for(int i = 0; i < tab.length; i++){
+            for(int j = 0; j < tab.length; j++){
+                if(tab[i][j] == '$') return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -16,6 +94,9 @@ public class CommandeConcret implements Commande{
      */
 
     public char[][] move(KeyCode c, char[][] tab){
+
+        //Manque ajout des touches a la pile ssi le mouvement a ete valide
+
         int[] dir = directionJoueur(c);
         int xCoordJ = -1;
         int yCoordJ = -1;

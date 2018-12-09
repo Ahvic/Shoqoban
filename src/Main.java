@@ -1,36 +1,56 @@
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import controller.Controleur;
-public class Main extends Application {
+import java.util.LinkedList;
 
-    // HELLO IM A TEST wesh alors
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Controleur controleur = Controleur.getInstance();
-        GridPane gridPane = new GridPane();
-        primaryStage.setScene(new Scene(controleur.getGridPane(), 800, 400));
-        primaryStage.setTitle("Shoqoban");
-        primaryStage.show();
-        controleur.Init();
-        /*gridpane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-
-            public void handle(KeyEvent event) {
-                KeyCode input = event.getCode();
-                controleur.Jouer(input);
-            }
-        });
-        controleur.getGridPane().requestFocus();*/
-    }
+public class Main{
 
 
     public static void main(String[] args) {
-        launch(args);
+
+        LinkedList<KeyCode> ensInput = new LinkedList<>();
+        int nbUndo = 0;
+
+        ensInput.add(KeyCode.valueOf("A"));
+        ensInput.add(KeyCode.valueOf("B"));
+        ensInput.add(KeyCode.valueOf("C"));
+        ensInput.add(KeyCode.valueOf("D"));
+        ensInput.add(KeyCode.valueOf("E"));
+
+        for(int i = 0; i < ensInput.size(); i++)
+            System.out.println(ensInput.get(ensInput.size()-1-i));
+        System.out.println();
+
+
+        nbUndo = 20;
+        for(int i = nbUndo; i > 0; i--) {
+            if(!ensInput.isEmpty())
+                ensInput.removeLast();
+            nbUndo--;
+        }
+
+        System.out.println(nbUndo);
+
+        ensInput.add(KeyCode.valueOf("Y"));
+
+        for(int i = 0; i < ensInput.size(); i++)
+            System.out.println(ensInput.get(ensInput.size()-1-i));
+
+
+        /*
+        Concepteur c = new Concepteur();
+
+        char[][] tab = c.lectureFichier("Level1.xsb");
+        Stack<KeyCode> stack = new Stack<KeyCode>();
+
+        stack.push(KeyCode.valueOf("UP"));
+
+        CommandeConcret cc = new CommandeConcret();
+        char[][] res = cc.undo(stack, tab);
+
+        for(int i = 0; i < tab.length; i++){
+            for(int j = 0; j < tab[0].length; j++)
+                System.out.print(res[i][j]);
+            System.out.println("");
+        }
+        */
     }
 }
