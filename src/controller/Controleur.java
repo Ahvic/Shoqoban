@@ -1,17 +1,9 @@
 package controller;
 
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import model.CommandeConcret;
 import model.Concepteur;
 import vue.BuilderVue;
-import vue.VueJeu;
-import vue.VueMenu;
+import vue.Vue;
 
 
 public class Controleur {
@@ -22,14 +14,7 @@ public class Controleur {
 
     private static CommandeConcret commande;
 
-    private static BuilderVue bld;
-
-    private static GridPane gridPane;
-
-    private static char[][] tab_Etat;
-
-    private static VueJeu vuejeu;
-
+    BuilderVue fabrique;
 
     /*Constructeur privé*/
     private Controleur(){
@@ -46,35 +31,43 @@ public class Controleur {
         }
         return Controleur.instance;
     }
+    //Tout ce qui se rapproche à la vue
 
+    public Controleur(BuilderVue fabrique){
+        this.fabrique = fabrique;
+    }
+
+    Vue choixVue(String nomVue){
+        Vue vue;
+
+        vue = fabrique.creerVue(nomVue);
+
+        return vue;
+    }
 
     /*récuperation du tableau, création de vueJeu, utilisation de la méthode afficher de vueJeu
      * et attente d'une action pour actualiser la vue*/
 
+    private void Jouer(){
+        char[][] tab_Etat = concepteur.lectureFichier("something.xsb");
+        /*VUE sera ici*/
+        CommandeConcret commande = new CommandeConcret();
+        /*tant qu'on a pas gagner, demander une commande"*/
 
-    public void Init(){
-        Controleur.tab_Etat = concepteur.lectureFichier("/home/calgary/IdeaProjects/Shoqoban/sokoban01.xsb");
-        System.out.println(tab_Etat[0][0]);
-        Controleur.vuejeu = new VueJeu(Controleur.tab_Etat);
-        vuejeu.dessine(tab_Etat);
+        // tab_Etat = commande.move(, tab_Etat);//opère une modification sur le tableau
+        /*actualiser la vue puis recommencer*/
+
     }
 
 
-
-    public void Jouer(KeyCode c){
-        Controleur.tab_Etat = Controleur.commande.move(c, Controleur.tab_Etat);//opère une modification sur le tableau
-        Controleur.vuejeu.dessine(Controleur.tab_Etat);
-    }
-
-
-    /*création de vueMenu, affichage*/
+    /*création de vueMenu, affichage et attente d'une action*/
 
     public void Menu(){
 
-    }
 
-    public GridPane getGridPane(){
-        return vuejeu.getGridPane();
+
+         Jouer();
+
     }
 
 

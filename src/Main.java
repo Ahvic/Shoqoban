@@ -1,11 +1,8 @@
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import controller.Controleur;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import vue.VueJeu;
 public class Main extends Application {
 
     // HELLO IM A TEST wesh alors
@@ -13,23 +10,32 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Controleur controleur = Controleur.getInstance();
-        controleur.Init();
-        primaryStage.setScene(new Scene(controleur.getGridPane(), 800, 400));
-        primaryStage.setTitle("Shoqoban");
+
+        char entrepot[][] = {{'#', '#', '#', '#', '#', '#', '#'},
+                {'#', '.', ' ', '$', ' ', '.', '#'},
+                {'#', ' ', '$', '@', '$', ' ', '#'},
+                {'#', '.', ' ', '$', ' ', '.', '#'},
+                {'#', '#', '#', '#', '#', '#', '#'}};
+
+        VueJeu vue = new VueJeu(entrepot);
+        vue.gridPaneCentre();
+
+        /* montage de la scene */
+
+        vue = (VueJeu) vue.setCentre(vue.getGridPane());
+        Scene scene =   vue.retourneScene();
+
+        primaryStage.setScene(scene);
+
+        primaryStage.setTitle("shoqoban");
         primaryStage.show();
-        controleur.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-
-            public void handle(KeyEvent event) {
-                KeyCode input = event.getCode();
-                controleur.Jouer(input);
-            }
-        });
-        controleur.getGridPane().requestFocus();
     }
 
 
     public static void main(String[] args) {
+
+
+        Controleur.getInstance().Menu();
         launch(args);
     }
 }
