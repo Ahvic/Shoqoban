@@ -16,7 +16,7 @@ public class BuilderVue {
             vue = new VueMenu();
         }
         else if(nomVue.equals("Jeu")){
-           char[][] tabEtat = Controleur.getInstance().getEtat();
+           //char[][] tabEtat = Controleur.getInstance().getEtat();
             vue = new VueJeu();
         }
         else if(nomVue.equals("Defaite")){
