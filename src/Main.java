@@ -9,6 +9,7 @@ import controller.Controleur;
 import javafx.util.Pair;
 import model.CommandeConcret;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +17,13 @@ public class Main{
 
     public static void main(String[] args) {
         Controleur controleur = Controleur.getInstance();
-        controleur.Init();
+
+        try{
+            controleur.Init();
+        }catch (FileNotFoundException exception)
+        {
+            System.out.println ("Le fichier n'a pas été trouvez");
+        }
 
         while(true){
             char[][] tab = controleur.getEtat();

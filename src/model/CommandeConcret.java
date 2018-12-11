@@ -73,7 +73,9 @@ public class CommandeConcret implements Commande{
         }
     }
 
-    public void redo(){}
+    public void redo(){
+
+    }
 
     private KeyCode inversionTouche(KeyCode c){
 
@@ -113,10 +115,12 @@ public class CommandeConcret implements Commande{
         ArrayList<Pair> ensInput = control.getEnsInput();
         int nbUndo = control.getNbUndo();
 
-        for(int i = nbUndo; i > 0; i--) {
-            if(!ensInput.isEmpty())
-                ensInput.remove(ensInput.size()-1);
-            nbUndo--;
+        if(!versArriere) {
+            for (int i = nbUndo; i > 0; i--) {
+                if (!ensInput.isEmpty())
+                    ensInput.remove(ensInput.size() - 1);
+                nbUndo--;
+            }
         }
 
         //0 sans caisse, 1 avec caisse
