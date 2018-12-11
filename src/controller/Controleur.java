@@ -1,17 +1,11 @@
 package controller;
 
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import model.CommandeConcret;
 import model.Concepteur;
 import vue.BuilderVue;
 import vue.VueJeu;
-import vue.VueMenu;
 
 
 public class Controleur {
@@ -53,9 +47,10 @@ public class Controleur {
 
 
     public void Init(){
-        Controleur.tab_Etat = concepteur.lectureFichier("/home/calgary/IdeaProjects/Shoqoban/sokoban01.xsb");
+        Controleur.tab_Etat = concepteur.lectureFichier("sokoban01.xsb");
         System.out.println(tab_Etat[0][0]);
-        Controleur.vuejeu = new VueJeu(Controleur.tab_Etat);
+        Controleur.vuejeu = new VueJeu();
+        Controleur.vuejeu.initilisation(Controleur.tab_Etat);
         vuejeu.dessine(tab_Etat);
 
     }

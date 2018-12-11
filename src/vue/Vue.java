@@ -2,23 +2,25 @@ package vue;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-abstract class Vue {
+public abstract class Vue {
 
-    private GridPane principale;
+    protected GridPane gridPane = new GridPane();
 
     ArrayList<Region> bas = new ArrayList<Region>();
     Region centre;
     int largeurScene = 800;
     int hauteurScene = 400;
 
+
+
+    public GridPane getGridPane(){
+        return this.gridPane;
+    }
     public Vue setLargeur(int l){
         largeurScene=l;
         return this;
@@ -28,7 +30,10 @@ abstract class Vue {
         hauteurScene=l;
         return this;
     }
-
+    public Vue gridPaneCentre(){
+        gridPane.setAlignment(Pos.CENTER);
+        return this;
+    }
     public Vue setCentre(Region node) {
         centre = node;
         return this;
@@ -38,6 +43,8 @@ abstract class Vue {
         bas.add(node);
         return this;
     }
+
+
 
     public javafx.scene.Scene retourneScene() {
         assert (centre !=null);
