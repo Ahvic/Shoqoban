@@ -6,6 +6,7 @@ import javafx.util.Pair;
 import model.CommandeConcret;
 import model.Concepteur;
 import vue.BuilderVue;
+import vue.Vue;
 import vue.VueJeu;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class Controleur {
 
     private static char[][] tab_Etat;
 
-    private static VueJeu vuejeu;
+    private static Vue vue;
 
     private static ArrayList<Pair> ensInput;
 
@@ -54,29 +55,34 @@ public class Controleur {
 
 
     public void Init(){
+        Controleur.bld = new BuilderVue();
         Controleur.tab_Etat = concepteur.lectureFichier("sokoban01.xsb");
         System.out.println(tab_Etat[0][0]);
-        Controleur.vuejeu = new VueJeu();
-        vuejeu.dessine(tab_Etat);
-
+        Controleur.vue = bld.creerVue("Jeu");
+        Controleur.gridPane = vue.getGridPane();
+        vue.dessine(tab_Etat);
     }
 
 
 
-    public void Jouer(KeyCode c){
+    public int Jouer(KeyCode c){
         Controleur.tab_Etat = Controleur.commande.move(c, Controleur.tab_Etat);//opère une modification sur le tableau
-        Controleur.vuejeu.dessine(Controleur.tab_Etat);
+        Controleur.vue.dessine(Controleur.tab_Etat);
+        if(false){
+            return 1;
+        }
+        return 0;
     }
 
 
     /*création de vueMenu, affichage*/
 
     public void Menu(){
-
+        Controleur.vue = bld.creerVue("Menu");
     }
 
     public GridPane getGridPane(){
-        return vuejeu.getGridPane();
+        return vue.getGridPane();
     }
 
     public char[][] getEtat(){
