@@ -1,17 +1,17 @@
 package controller;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.util.Pair;
 import model.CommandeConcret;
 import model.Concepteur;
 import vue.BuilderVue;
-import vue.VueJeu;
-import vue.VueMenu;
+import vue.Vue;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 public class Controleur {
@@ -28,13 +28,18 @@ public class Controleur {
 
     private static char[][] tab_Etat;
 
-    private static VueJeu vuejeu;
+    private static Vue vue;
+
+    private static ArrayList<Pair> ensInput;
+
+    private static int nbUndo;
 
 
     /*Constructeur privé*/
     private Controleur(){
         Controleur.concepteur = new Concepteur();
         Controleur.commande = new CommandeConcret();
+        Controleur.ensInput = new ArrayList<>();
     }
 
 
@@ -52,27 +57,60 @@ public class Controleur {
      * et attente d'une action pour actualiser la vue*/
 
 
-    public void Init(){
-        Controleur.tab_Etat = concepteur.lectureFichier("/home/calgary/IdeaProjects/Shoqoban/sokoban01.xsb");
-        System.out.println(tab_Etat[0][0]);
-        Controleur.vuejeu = new VueJeu(Controleur.tab_Etat);
-        vuejeu.dessine(tab_Etat);
+    public void Init() throws FileNotFoundException {
+        Controleur.bld = new BuilderVue();
+        Controleur.niveaux = concepteur.lectureNiveaux();
+//        Controleur.tab_Etat = concepteur.lectureFichier("Niveaux/sokoban01.xsb");
+  //      System.out.println(tab_Etat[0][0]);
+        Controleur.vue = Controleur.bld.creerVue("Menu");
+        Controleur.gridPane = vue.getGridPane();
+        vue.dessine();
     }
 
 
 
     public void Jouer(KeyCode c){
-        Controleur.tab_Etat = Controleur.commande.move(c, Controleur.tab_Etat);//opère une modification sur le tableau
-        Controleur.vuejeu.dessine(Controleur.tab_Etat);
-        /*actualiser la vue*/
-
+        Controleur.commande.move(c);//opère une modification sur le tableau
+        //Controleur.vuejeu.dessine(Controleur.tab_Etat);
     }
 
 
     /*création de vueMenu, affichage*/
 
     public void Menu(){
+        Controleur.vue = bld.creerVue("Menu");
+    }
 
+    public GridPane getGridPane(){
+        return vue.getGridPane();
+    }
+
+    public char[][] getEtat(){
+        return Controleur.tab_Etat;
+    }
+
+    public void setEtat(char[][] tab){
+        Controleur.tab_Etat = tab;
+    }
+
+    public ArrayList<Pair> getEnsInput(){
+        return Controleur.ensInput;
+    }
+
+    public void setEnsInput(ArrayList<Pair> a){
+        Controleur.ensInput = a;
+    }
+
+    public int getNbUndo(){
+        return Controleur.nbUndo;
+    }
+
+    public void setNbUndo(int a){
+        Controleur.nbUndo = a;
+    }
+
+    public ArrayList<String> getNiveaux(){
+        return Controleur.niveaux;
     }
 
 

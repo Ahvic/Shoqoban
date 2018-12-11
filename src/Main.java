@@ -6,31 +6,44 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import controller.Controleur;
-public class Main extends Application {
+import javafx.util.Pair;
+import model.CommandeConcret;
 
-    // HELLO IM A TEST wesh alors
+import java.util.ArrayList;
+import java.util.Scanner;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Controleur controleur = Controleur.getInstance();
-        GridPane gridPane = new GridPane();
-        primaryStage.setScene(new Scene(controleur.getGridPane(), 800, 400));
-        primaryStage.setTitle("Shoqoban");
-        primaryStage.show();
-        controleur.Init();
-        /*gridpane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-
-            public void handle(KeyEvent event) {
-                KeyCode input = event.getCode();
-                controleur.Jouer(input);
-            }
-        });
-        controleur.getGridPane().requestFocus();*/
-    }
-
+public class Main{
 
     public static void main(String[] args) {
-        launch(args);
+        Controleur controleur = Controleur.getInstance();
+        controleur.Init();
+
+        while(true){
+            char[][] tab = controleur.getEtat();
+
+            for(int i = 0; i < tab.length; i++){
+                for(int j = 0; j < tab[0].length; j++){
+                    System.out.print(tab[i][j]);
+                }
+                System.out.println();
+            }
+
+            KeyCode input = KeyCode.valueOf(new Scanner(System.in).next());
+            CommandeConcret cc = new CommandeConcret();
+
+            if(input.getName() != "A")
+                controleur.Jouer(input);
+            else
+                cc.undo();
+
+            System.out.println("NbUndo: " + controleur.getNbUndo());
+            ArrayList<Pair> p = controleur.getEnsInput();
+
+            for (int i = 0; i < p.size(); i++) {
+                System.out.print("(" + p.get(i).getKey() + "," + p.get(i).getValue() + ")");
+            }
+
+            System.out.println();
+        }
     }
 }

@@ -5,8 +5,23 @@ public class BuilderVue {
 
     protected Vue vue;
 
-    public Vue getVue(){return vue;}
 
+
+    public Vue creerVue(String nomVue){
+        Vue vue = null;
+
+        if (nomVue.equals("Menu")){
+            vue = new VueMenu();
+        }
+        else if(nomVue.equals("Jeu")){
+            vue = new VueJeu();
+        }
+        else if(nomVue.equals("Fin")){
+            vue = new VueFin();
+        }
+
+        return vue;
+    }
 
 
 
