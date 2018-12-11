@@ -2,10 +2,13 @@ package controller;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.util.Pair;
 import model.CommandeConcret;
 import model.Concepteur;
 import vue.BuilderVue;
 import vue.VueJeu;
+
+import java.util.ArrayList;
 
 
 public class Controleur {
@@ -23,6 +26,10 @@ public class Controleur {
     private static char[][] tab_Etat;
 
     private static VueJeu vuejeu;
+
+    private static ArrayList<Pair> ensInput;
+
+    private static int nbUndo;
 
 
     /*Constructeur privé*/
@@ -71,6 +78,30 @@ public class Controleur {
 
     public GridPane getGridPane(){
         return vuejeu.getGridPane();
+    }
+
+    public char[][] getEtat(){
+        return Controleur.tab_Etat;
+    }
+
+    public void setEtat(char[][] tab){
+        Controleur.tab_Etat = tab;
+    }
+
+    public ArrayList<Pair> getEnsInput(){
+        return Controleur.ensInput;
+    }
+
+    public void setEnsInput(ArrayList<Pair> a){
+        Controleur.ensInput = a;
+    }
+
+    public int getNbUndo(){
+        return Controleur.nbUndo;
+    }
+
+    public void setNbUndo(int a){
+        Controleur.nbUndo = a;
     }
 
 
