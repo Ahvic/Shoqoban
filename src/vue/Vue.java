@@ -44,7 +44,9 @@ public abstract class Vue {
         return this;
     }
 
-
+    public void dessine(char[][] c){
+        System.out.println("nothing happend");
+    }
 
     public javafx.scene.Scene retourneScene() {
         assert (centre !=null);

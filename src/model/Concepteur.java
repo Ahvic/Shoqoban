@@ -3,7 +3,9 @@ package model;
 /**
  * Created by hadji on 01/12/18.
  */
+
 import java.io.*;
+import java.util.ArrayList;
 
 
 public class Concepteur {
@@ -62,5 +64,27 @@ public class Concepteur {
         }
         return null;
     }
+    public ArrayList lectureNiveaux() throws IOException {
+        ArrayList<String> niveaux = new ArrayList<String>();
+        try{
+            File repertoire = new File("Niveaux");
+            if(!repertoire.isDirectory()) {
+                throw new IOException("IOException Lecture Niveaux");
+            }
+            String [] listefichiers;
+            int i;
+            listefichiers=repertoire.list();
+            for(i=0;i<listefichiers.length;i++){
+                if(listefichiers[i].endsWith(".xsb")){
+                    niveaux.add(listefichiers[i]);
+                }
+            }
+        }catch(FileNotFoundException exception){
+            System.out.print("Pas de dossier Niveaux");
+        }catch (IOException exception){
+            System.out.print(exception.toString());
+        }
 
+        return niveaux;
+    }
 }

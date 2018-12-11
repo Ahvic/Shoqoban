@@ -9,6 +9,7 @@ import controller.Controleur;
 public class Main extends Application {
 
     // HELLO IM A TEST wesh alors
+    int a;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -22,10 +23,12 @@ public class Main extends Application {
 
             public void handle(KeyEvent event) {
                 KeyCode input = event.getCode();
-                controleur.Jouer(input);
+                a = controleur.Jouer(input);
             }
         });
-        controleur.getGridPane().requestFocus();
+        if( a == 0 ){
+            controleur.getGridPane().requestFocus();
+        }
     }
 
 

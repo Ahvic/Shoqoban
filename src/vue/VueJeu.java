@@ -1,5 +1,6 @@
 package vue;
 
+import controller.Controleur;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -9,10 +10,11 @@ import javafx.scene.layout.GridPane;
  */
 public class VueJeu extends Vue{
 
-    public Button[][] myButton;
+    private Button[][] myButton;
 
 
-    public VueJeu(char[][] etats){
+    public VueJeu(){
+        char[][] etats = Controleur.getInstance().getEtat();
         myButton = new Button[etats.length][etats[0].length];
         for (int i=0;i<etats.length;i++) {
             for(int j=0;j<etats[i].length;j++){
@@ -23,15 +25,13 @@ public class VueJeu extends Vue{
             }
 
         }
-        dessine(etats);
-    }
-    public VueJeu() {
-
+        dessine();
     }
 
 
 
-    public void dessine(char [][] etats){
+    public void dessine(){
+        char [][] etats = Controleur.getInstance().getEtat();
         for (int i=0;i<etats.length;i++) {
             for(int j=0;j<etats[i].length;j++){
                 for (VueObjets o : VueObjets.values()) {
