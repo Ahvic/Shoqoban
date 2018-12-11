@@ -44,8 +44,8 @@ public abstract class Vue {
         return this;
     }
 
-    public void dessine(char[][] c){
-        System.out.println("nothing happend");
+    public void dessine(){
+
     }
 
     public javafx.scene.Scene retourneScene() {
