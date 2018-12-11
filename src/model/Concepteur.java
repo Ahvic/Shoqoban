@@ -64,25 +64,15 @@ public class Concepteur {
         }
         return null;
     }
-    public ArrayList lectureNiveaux() throws IOException {
+    public ArrayList lectureNiveaux() throws FileNotFoundException {
         ArrayList<String> niveaux = new ArrayList<String>();
-        try{
-            File repertoire = new File("Niveaux");
-            if(!repertoire.isDirectory()) {
-                throw new IOException("IOException Lecture Niveaux");
+        File repertoire = new File("src/Niveaux");
+        String [] listefichiers;
+        listefichiers=repertoire.list();
+        for(int i=0;i<listefichiers.length;i++){
+            if(listefichiers[i].endsWith(".xsb")){
+                niveaux.add(listefichiers[i]);
             }
-            String [] listefichiers;
-            int i;
-            listefichiers=repertoire.list();
-            for(i=0;i<listefichiers.length;i++){
-                if(listefichiers[i].endsWith(".xsb")){
-                    niveaux.add(listefichiers[i]);
-                }
-            }
-        }catch(FileNotFoundException exception){
-            System.out.print("Pas de dossier Niveaux");
-        }catch (IOException exception){
-            System.out.print(exception.toString());
         }
 
         return niveaux;

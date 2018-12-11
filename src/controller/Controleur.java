@@ -10,6 +10,7 @@ import model.Concepteur;
 import vue.BuilderVue;
 import vue.Vue;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
@@ -58,11 +59,12 @@ public class Controleur {
      * et attente d'une action pour actualiser la vue*/
 
 
-    public void Init(){
+    public void Init() throws FileNotFoundException {
         Controleur.bld = new BuilderVue();
-        Controleur.tab_Etat = concepteur.lectureFichier("sokoban01.xsb");
-        System.out.println(tab_Etat[0][0]);
-        Controleur.vue = Controleur.bld.creerVue("Jeu");
+        Controleur.niveaux = concepteur.lectureNiveaux();
+//        Controleur.tab_Etat = concepteur.lectureFichier("Niveaux/sokoban01.xsb");
+  //      System.out.println(tab_Etat[0][0]);
+        Controleur.vue = Controleur.bld.creerVue("Menu");
         Controleur.gridPane = vue.getGridPane();
         vue.dessine();
     }

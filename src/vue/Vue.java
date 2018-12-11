@@ -45,7 +45,7 @@ public abstract class Vue {
     }
 
     public void dessine(){
-
+        System.out.println("nothing happend");
     }
 
     public javafx.scene.Scene retourneScene() {
