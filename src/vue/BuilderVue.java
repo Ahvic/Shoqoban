@@ -7,7 +7,7 @@ public class BuilderVue {
 
     protected Vue vue;
 
-    public Vue getVue(){return vue;}
+
 
     public Vue creerVue(String nomVue){
         Vue vue = null;
@@ -16,15 +16,13 @@ public class BuilderVue {
             vue = new VueMenu();
         }
         else if(nomVue.equals("Jeu")){
-           //char[][] tabEtat = Controleur.getInstance().getEtat();
-            vue = new VueJeu();
+            char[][] tabEtat = Controleur.getInstance().getEtat();
+            vue = new VueJeu(tabEtat);
         }
-        else if(nomVue.equals("Defaite")){
-            vue = new VueFin(0);
+        else if(nomVue.equals("Fin")){
+            vue = new VueFin();
         }
-        else if(nomVue.equals("Victoire")){
-            vue = new VueFin(1);
-        }
+
         return vue;
     }
 

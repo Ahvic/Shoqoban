@@ -12,12 +12,12 @@ public class VueJeu extends Vue{
     public Button[][] myButton;
 
 
-    public void initilisation(char[][] etats){
+    public VueJeu(char[][] etats){
         myButton = new Button[etats.length][etats[0].length];
         for (int i=0;i<etats.length;i++) {
             for(int j=0;j<etats[i].length;j++){
                 myButton[i][j] = new Button();
-                myButton[i][j].setMinSize(32,32);
+                myButton[i][j].setMinSize(48,48);
                 myButton[i][j].setMaxSize(48,48);
                 gridPane.add(myButton[i][j],j,i);
             }
