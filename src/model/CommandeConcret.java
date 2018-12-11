@@ -167,8 +167,8 @@ public class CommandeConcret implements Commande{
             }
         }
 
-        /*if(mouvement.getKey() != null)
-            ensInput.add(mouvement);*/
+        if(mouvement.getKey() != null)
+            ensInput.add(mouvement);
 
         control.setNbUndo(nbUndo);
         control.setEtat(tab);

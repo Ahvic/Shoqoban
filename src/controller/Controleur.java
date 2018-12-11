@@ -36,6 +36,7 @@ public class Controleur {
     private Controleur(){
         Controleur.concepteur = new Concepteur();
         Controleur.commande = new CommandeConcret();
+        Controleur.ensInput = new ArrayList<>();
     }
 
 
