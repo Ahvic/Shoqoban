@@ -57,7 +57,6 @@ public class Controleur {
         Controleur.tab_Etat = concepteur.lectureFichier("sokoban01.xsb");
         System.out.println(tab_Etat[0][0]);
         Controleur.vuejeu = new VueJeu();
-        Controleur.vuejeu.initilisation(Controleur.tab_Etat);
         vuejeu.dessine(tab_Etat);
 
     }
