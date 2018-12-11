@@ -27,7 +27,7 @@ public class Controleur {
 
     private static VueJeu vuejeu;
 
-    private static ArrayList<Pair> ensInput = new ArrayList<>();
+    private static ArrayList<Pair> ensInput;
 
     private static int nbUndo;
 
@@ -36,6 +36,7 @@ public class Controleur {
     private Controleur(){
         Controleur.concepteur = new Concepteur();
         Controleur.commande = new CommandeConcret();
+        Controleur.ensInput = new ArrayList<>();
     }
 
 
@@ -63,7 +64,7 @@ public class Controleur {
 
 
     public void Jouer(KeyCode c){
-        Controleur.commande.move(c);//opère une modification sur le tableau
+        Controleur.commande.move(c,false);//opère une modification sur le tableau
         //Controleur.vuejeu.dessine(Controleur.tab_Etat);
     }
 

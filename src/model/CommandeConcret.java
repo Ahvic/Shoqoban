@@ -3,8 +3,6 @@ package model;
 import controller.Controleur;
 import javafx.scene.input.KeyCode;
 import javafx.util.Pair;
-
-import javax.naming.ldap.Control;
 import java.util.ArrayList;
 
 public class CommandeConcret implements Commande{
@@ -14,7 +12,65 @@ public class CommandeConcret implements Commande{
     }
 
     public void undo(){
+        Controleur control = Controleur.getInstance();
 
+        char[][] tab = control.getEtat();
+        ArrayList<Pair> ensInput = control.getEnsInput();
+        int nbUndo = control.getNbUndo();
+
+        if (!ensInput.isEmpty()) {
+            nbUndo++;
+            int indexElemVoulu = ensInput.size()-nbUndo;
+
+            if(indexElemVoulu >= 0){
+                Pair lastElem = ensInput.get(indexElemVoulu);
+                KeyCode  lastKey = (KeyCode) lastElem.getKey();
+                int  lKCaisse = (int) lastElem.getValue();
+
+                System.out.println("Last elem: " + "(" + lastKey + "," + lKCaisse + ")");
+
+                int[] JCVD = directionJoueur(lastKey);
+
+                int xCoordJ = -1;
+                int yCoordJ = -1;
+
+                for(int i = 0; i < tab.length; i++){
+                    for(int j = 0; j < tab[0].length; j++)
+                        if(tab[i][j] == '@' || tab[i][j] == '+'){
+                            xCoordJ = i;
+                            yCoordJ = j;
+                        }
+                }
+
+                move(inversionTouche(lastKey), true);
+
+                //Si on a pousse une caisse
+                if(lKCaisse == 1){
+
+                    char derLastDir = tab[xCoordJ + JCVD[0]][yCoordJ + JCVD[1]];
+
+                    System.out.println(derLastDir + " (" + xCoordJ + JCVD[0] + "," + yCoordJ + JCVD[1] + ")");
+
+                    if(derLastDir == '$'){
+                        if(tab[xCoordJ][yCoordJ] == ' ') tab[xCoordJ][yCoordJ] = '$';
+                        if(tab[xCoordJ][yCoordJ] == '.') tab[xCoordJ][yCoordJ] = '*';
+
+                        tab[xCoordJ + JCVD[0]][yCoordJ + JCVD[1]] = ' ';
+                    }
+
+                    if(derLastDir == '*'){
+                        if(tab[xCoordJ][yCoordJ] == ' ') tab[xCoordJ][yCoordJ] = '$';
+                        if(tab[xCoordJ][yCoordJ] == '.') tab[xCoordJ][yCoordJ] = '*';
+
+                        tab[xCoordJ + JCVD[0]][yCoordJ + JCVD[1]] = '.';
+                    }
+                }
+
+                control.setNbUndo(nbUndo);
+                control.setEtat(tab);
+                control.setEnsInput(ensInput);
+            }
+        }
     }
 
     public void redo(){}
@@ -50,7 +106,7 @@ public class CommandeConcret implements Commande{
         return true;
     }
 
-    public void move(KeyCode c){
+    public void move(KeyCode c, boolean versArriere){
         Controleur control = Controleur.getInstance();
 
         char[][] tab = control.getEtat();
@@ -167,7 +223,7 @@ public class CommandeConcret implements Commande{
             }
         }
 
-        if(mouvement.getKey() != null)
+        if(mouvement.getKey() != null && !versArriere)
             ensInput.add(mouvement);
 
         control.setNbUndo(nbUndo);

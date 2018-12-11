@@ -10,6 +10,6 @@ public interface Commande {
     void undo();
     void redo();
     boolean aGagner();
-    void move(KeyCode c);
+    void move(KeyCode c, boolean versArriere);
 
 }
