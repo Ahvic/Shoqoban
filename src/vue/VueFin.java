@@ -27,5 +27,8 @@ public class VueFin extends Vue{
 
 
     }
+    public void dessine(){
+
+    }
 
 }
