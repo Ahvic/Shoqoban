@@ -43,7 +43,7 @@ public abstract class Vue {
         bas.add(node);
         return this;
     }
-
+    public abstract void dessine();
 
 
     public javafx.scene.Scene retourneScene() {

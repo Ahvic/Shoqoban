@@ -1,8 +1,6 @@
 package vue;
 
 
-import controller.Controleur;
-
 public class BuilderVue {
 
     protected Vue vue;
@@ -16,8 +14,7 @@ public class BuilderVue {
             vue = new VueMenu();
         }
         else if(nomVue.equals("Jeu")){
-            char[][] tabEtat = Controleur.getInstance().getEtat();
-            vue = new VueJeu(tabEtat);
+            vue = new VueJeu();
         }
         else if(nomVue.equals("Fin")){
             vue = new VueFin();
