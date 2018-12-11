@@ -44,7 +44,7 @@ public abstract class Vue {
         return this;
     }
 
-    public void dessine(char[][] c){
+    public void dessine(){
         System.out.println("nothing happend");
     }
 

@@ -1,13 +1,16 @@
 package controller;
 
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import model.CommandeConcret;
 import model.Concepteur;
 import vue.BuilderVue;
-import vue.VueJeu;
+import vue.Vue;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
@@ -25,7 +28,7 @@ public class Controleur {
 
     private static char[][] tab_Etat;
 
-    private static VueJeu vuejeu;
+    private static Vue vue;
 
     private static ArrayList<Pair> ensInput;
 
@@ -54,17 +57,20 @@ public class Controleur {
      * et attente d'une action pour actualiser la vue*/
 
 
-    public void Init(){
-        Controleur.tab_Etat = concepteur.lectureFichier("sokoban01.xsb");
-        //Controleur.vuejeu = new VueJeu();
-        //vuejeu.dessine(tab_Etat);
-
+    public void Init() throws FileNotFoundException {
+        Controleur.bld = new BuilderVue();
+        Controleur.niveaux = concepteur.lectureNiveaux();
+//        Controleur.tab_Etat = concepteur.lectureFichier("Niveaux/sokoban01.xsb");
+  //      System.out.println(tab_Etat[0][0]);
+        Controleur.vue = Controleur.bld.creerVue("Menu");
+        Controleur.gridPane = vue.getGridPane();
+        vue.dessine();
     }
 
 
 
     public void Jouer(KeyCode c){
-        Controleur.commande.move(c,false);//opère une modification sur le tableau
+        Controleur.commande.move(c);//opère une modification sur le tableau
         //Controleur.vuejeu.dessine(Controleur.tab_Etat);
     }
 
@@ -72,11 +78,11 @@ public class Controleur {
     /*création de vueMenu, affichage*/
 
     public void Menu(){
-
+        Controleur.vue = bld.creerVue("Menu");
     }
 
     public GridPane getGridPane(){
-        return vuejeu.getGridPane();
+        return vue.getGridPane();
     }
 
     public char[][] getEtat(){
@@ -101,6 +107,10 @@ public class Controleur {
 
     public void setNbUndo(int a){
         Controleur.nbUndo = a;
+    }
+
+    public ArrayList<String> getNiveaux(){
+        return Controleur.niveaux;
     }
 
 
