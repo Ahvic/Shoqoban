@@ -23,12 +23,10 @@ public class Main extends Application {
 
             public void handle(KeyEvent event) {
                 KeyCode input = event.getCode();
-                a = controleur.Jouer(input);
+                controleur.Jouer(input);
             }
         });
-        if( a == 0 ){
-            controleur.getGridPane().requestFocus();
-        }
+        controleur.getGridPane().requestFocus();
     }
 
 

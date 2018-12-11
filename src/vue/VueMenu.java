@@ -10,7 +10,6 @@ public class VueMenu extends Vue {
 
      */
 
-    @Override
     public void dessine() {
 
     }
