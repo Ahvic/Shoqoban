@@ -66,9 +66,10 @@ public class Controleur {
 
 
     public int Jouer(KeyCode c){
-        Controleur.tab_Etat = Controleur.commande.move(c, Controleur.tab_Etat);//opère une modification sur le tableau
+        Controleur.commande.move(c);//opère une modification sur le tableau
         Controleur.vue.dessine(Controleur.tab_Etat);
-        if(false){
+        if(Controleur.commande.aGagner()){
+            System.out.println("hdziuzdhuodzh");
             return 1;
         }
         return 0;
