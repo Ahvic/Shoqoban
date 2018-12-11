@@ -74,7 +74,20 @@ public class CommandeConcret implements Commande{
     }
 
     public void redo(){
+        Controleur control = Controleur.getInstance();
 
+        ArrayList<Pair> ensInput = control.getEnsInput();
+        int nbUndo = control.getNbUndo();
+
+        int indexElemVoulu = ensInput.size()-nbUndo;
+
+        if(indexElemVoulu < ensInput.size()) {
+            KeyCode mouv = (KeyCode) ensInput.get(indexElemVoulu).getKey();
+            move(mouv, true);
+
+            nbUndo--;
+            control.setNbUndo(nbUndo);
+        }
     }
 
     private KeyCode inversionTouche(KeyCode c){
@@ -108,14 +121,14 @@ public class CommandeConcret implements Commande{
         return true;
     }
 
-    public void move(KeyCode c, boolean versArriere){
+    public void move(KeyCode c, boolean sansSuppEnsInput){
         Controleur control = Controleur.getInstance();
 
         char[][] tab = control.getEtat();
         ArrayList<Pair> ensInput = control.getEnsInput();
         int nbUndo = control.getNbUndo();
 
-        if(!versArriere) {
+        if(!sansSuppEnsInput) {
             for (int i = nbUndo; i > 0; i--) {
                 if (!ensInput.isEmpty())
                     ensInput.remove(ensInput.size() - 1);
@@ -227,7 +240,7 @@ public class CommandeConcret implements Commande{
             }
         }
 
-        if(mouvement.getKey() != null && !versArriere)
+        if(mouvement.getKey() != null && !sansSuppEnsInput)
             ensInput.add(mouvement);
 
         control.setNbUndo(nbUndo);
