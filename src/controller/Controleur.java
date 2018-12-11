@@ -64,7 +64,7 @@ public class Controleur {
 
 
     public void Jouer(KeyCode c){
-        Controleur.tab_Etat = Controleur.commande.move(c, Controleur.tab_Etat);//opère une modification sur le tableau
+        Controleur.commande.move(c);//opère une modification sur le tableau
         Controleur.vuejeu.dessine(Controleur.tab_Etat);
     }
 
