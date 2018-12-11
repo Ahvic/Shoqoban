@@ -18,15 +18,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(controleur.getGridPane(), 800, 400));
         primaryStage.setTitle("Shoqoban");
         primaryStage.show();
-        controleur.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-
-            public void handle(KeyEvent event) {
-                KeyCode input = event.getCode();
-                controleur.Jouer(input);
-            }
-        });
-        controleur.getGridPane().requestFocus();
+        controleur.play();
     }
 
 

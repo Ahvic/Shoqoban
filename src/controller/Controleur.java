@@ -1,6 +1,8 @@
 package controller;
 
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import model.CommandeConcret;
@@ -30,6 +32,8 @@ public class Controleur {
     private static ArrayList<Pair> ensInput;
 
     private static int nbUndo;
+
+    private static ArrayList<String> niveaux;
 
 
     /*Constructeur privé*/
@@ -70,6 +74,18 @@ public class Controleur {
         Controleur.vue.dessine();
     }
 
+    public void play(){
+        Controleur.gridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+
+            public void handle(KeyEvent event) {
+                KeyCode input = event.getCode();
+                Jouer(input);
+            }
+        });
+        Controleur.gridPane.requestFocus();
+    }
+
 
     /*création de vueMenu, affichage*/
 
@@ -103,6 +119,10 @@ public class Controleur {
 
     public void setNbUndo(int a){
         Controleur.nbUndo = a;
+    }
+
+    public ArrayList<String> getNiveaux(){
+        return Controleur.niveaux;
     }
 
 
