@@ -27,7 +27,7 @@ public class Controleur {
 
     private static VueJeu vuejeu;
 
-    private static ArrayList<Pair> ensInput;
+    private static ArrayList<Pair> ensInput = new ArrayList<>();
 
     private static int nbUndo;
 
@@ -55,9 +55,8 @@ public class Controleur {
 
     public void Init(){
         Controleur.tab_Etat = concepteur.lectureFichier("sokoban01.xsb");
-        System.out.println(tab_Etat[0][0]);
-        Controleur.vuejeu = new VueJeu();
-        vuejeu.dessine(tab_Etat);
+        //Controleur.vuejeu = new VueJeu();
+        //vuejeu.dessine(tab_Etat);
 
     }
 
@@ -65,7 +64,7 @@ public class Controleur {
 
     public void Jouer(KeyCode c){
         Controleur.commande.move(c);//opère une modification sur le tableau
-        Controleur.vuejeu.dessine(Controleur.tab_Etat);
+        //Controleur.vuejeu.dessine(Controleur.tab_Etat);
     }
 
 
