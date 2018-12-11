@@ -57,6 +57,7 @@ public class Controleur {
         System.out.println(tab_Etat[0][0]);
         Controleur.vuejeu = new VueJeu(Controleur.tab_Etat);
         vuejeu.dessine(tab_Etat);
+
     }
 
 

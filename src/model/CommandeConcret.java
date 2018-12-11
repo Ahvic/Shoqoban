@@ -15,6 +15,7 @@ public class CommandeConcret implements Commande{
      * @return le tableau modifie
      */
 
+
     public char[][] move(KeyCode c, char[][] tab){
         int[] dir = directionJoueur(c);
         int xCoordJ = -1;
