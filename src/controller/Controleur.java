@@ -1,6 +1,8 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -42,6 +44,7 @@ public class Controleur {
         Controleur.concepteur = new Concepteur();
         Controleur.commande = new CommandeConcret();
         Controleur.ensInput = new ArrayList<>();
+        Controleur.bld = new BuilderVue();
     }
 
 
@@ -60,13 +63,13 @@ public class Controleur {
 
 
     public void Init() throws FileNotFoundException {
-        Controleur.bld = new BuilderVue();
         Controleur.niveaux = concepteur.lectureNiveaux();
-//        Controleur.tab_Etat = concepteur.lectureFichier("Niveaux/sokoban01.xsb");
-  //      System.out.println(tab_Etat[0][0]);
+        // Controleur.tab_Etat = concepteur.lectureFichier("Niveaux/sokoban01.xsb");
+        // System.out.println(tab_Etat[0][0]);
         Controleur.vue = Controleur.bld.creerVue("Menu");
+        for (int i=0; i<Controleur.vue.getButton().length;i++)
+            Controleur.vue.getButton()[i].setOnAction(new MyAction(Controleur.vue.getButton()[i]));
         Controleur.gridPane = vue.getGridPane();
-        vue.dessine();
     }
 
 
@@ -76,7 +79,10 @@ public class Controleur {
         Controleur.vue.dessine();
     }
 
-    public void play(){
+    public void play(Button indice){
+        Controleur.tab_Etat = concepteur.lectureFichier(indice.getName());
+        Controleur.vue = Controleur.bld.creerVue("Jeu");
+        Controleur.vue.dessine();
         Controleur.gridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 
@@ -86,6 +92,20 @@ public class Controleur {
             }
         });
         Controleur.gridPane.requestFocus();
+    }
+
+
+    class MyAction implements EventHandler<ActionEvent> {
+        Button indice;
+
+        MyAction(Button indice) {
+            this.indice = indice;
+        }
+
+        @Override
+        public void handle(ActionEvent event) {
+            play(indice);
+        }
     }
 
 
