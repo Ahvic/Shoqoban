@@ -39,6 +39,9 @@ public class VueMenu extends Vue{
     public Map<Button,String> getButtonMap(){
         return this.buttonMap;
     }
+    public String getLink(Button b){
+        return buttonMap.get(b);
+    }
     public void dessine() {
         System.out.println("dessine Menu");
     }
