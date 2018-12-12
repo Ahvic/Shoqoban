@@ -1,6 +1,8 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -59,40 +61,70 @@ public class Controleur {
      * et attente d'une action pour actualiser la vue*/
 
 
-    public void Init() throws FileNotFoundException {
+    public void InitVue() throws FileNotFoundException {
         Controleur.bld = new BuilderVue();
         Controleur.niveaux = concepteur.lectureNiveaux();
-//        Controleur.tab_Etat = concepteur.lectureFichier("Niveaux/sokoban01.xsb");
-  //      System.out.println(tab_Etat[0][0]);
+        //Controleur.tab_Etat = concepteur.lectureFichier("sokoban01.xsb");
+        //System.out.println(tab_Etat[0][0]);
         Controleur.vue = Controleur.bld.creerVue("Menu");
+        for (int i=0; i<vue.getButton().length;i++) {
+            vue.getButton()[i].setOnAction(new ActionReset(vue.getButton()[i]));
+        }
+
+        //Controleur.tab_Etat = concepteur.lectureFichier("sokoban01.xsb");
         Controleur.gridPane = vue.getGridPane();
         vue.dessine();
     }
 
 
 
-    public void Jouer(KeyCode c){
+    private void Jouer(KeyCode c){
         Controleur.commande.move(c);//opère une modification sur le tableau
         Controleur.vue.dessine();
     }
 
-    public void play(){
+    public void play(String s){
+        Controleur.tab_Etat = concepteur.lectureFichier(s);
+        Controleur.vue = Controleur.bld.creerVue("Jeu");
+        Controleur.gridPane = vue.getGridPane();
         Controleur.gridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 
             public void handle(KeyEvent event) {
                 KeyCode input = event.getCode();
                 Jouer(input);
+                if(Controleur.commande.aGagner()){
+                    System.out.println("Gagné !");
+                    Controleur.gridPane.setOnKeyPressed(null);
+                }
             }
         });
+
         Controleur.gridPane.requestFocus();
+
+
+    }
+
+    class ActionReset implements EventHandler<ActionEvent> {
+        Button b;
+        public ActionReset(Button b){
+            this.b = b;
+        }
+        public void handle(ActionEvent event) {
+            Controleur.choose(this.b);
+        }
+
+    }
+
+    private static void choose(Button b) {
+        Controleur.play(b.getName());
     }
 
 
     /*création de vueMenu, affichage*/
 
     public void Menu(){
-        Controleur.vue = bld.creerVue("Menu");
+        Controleur.vue = Controleur.bld.creerVue("Menu");
     }
 
     public GridPane getGridPane(){
