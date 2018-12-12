@@ -15,7 +15,6 @@ import java.util.Map;
  * Created by hadji on 04/12/18.
  */
 public class VueMenu extends Vue{
-    private Map<Button,String> buttonMap;
     public VueMenu() {
         buttonMap = new HashMap<Button,String>();
         Text txt = new Text("Menu");
@@ -36,12 +35,7 @@ public class VueMenu extends Vue{
         gridPane.setStyle("-fx-background-color: #666;");
         dessine();
     }
-    public Map<Button,String> getButtonMap(){
-        return this.buttonMap;
-    }
-    public String getLink(Button b){
-        return buttonMap.get(b);
-    }
+
     public void dessine() {
         System.out.println("dessine Menu");
     }

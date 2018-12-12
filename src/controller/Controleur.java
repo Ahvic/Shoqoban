@@ -2,10 +2,12 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 import model.CommandeConcret;
 import model.Concepteur;
@@ -14,6 +16,8 @@ import vue.Vue;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 
 public class Controleur {
@@ -36,6 +40,8 @@ public class Controleur {
 
     private static int nbUndo;
 
+    private static Stage primaryStage;
+
     private static ArrayList<String> niveaux;
 
 
@@ -57,6 +63,10 @@ public class Controleur {
         return Controleur.instance;
     }
 
+    public static void setPrimary(Stage primaryStage) {
+        Controleur.primaryStage = primaryStage;
+    }
+
 
     /*récuperation du tableau, création de vueJeu, utilisation de la méthode afficher de vueJeu
      * et attente d'une action pour actualiser la vue*/
@@ -67,8 +77,9 @@ public class Controleur {
         // Controleur.tab_Etat = concepteur.lectureFichier("Niveaux/sokoban01.xsb");
         // System.out.println(tab_Etat[0][0]);
         Controleur.vue = Controleur.bld.creerVue("Menu");
-        for (int i=0; i<Controleur.vue.getButton().length;i++)
-            Controleur.vue.getButton()[i].setOnAction(new MyAction(Controleur.vue.getButton()[i]));
+        for (Map.Entry<Button, String> entry : Controleur.vue.getButtonMap().entrySet()) {
+            entry.getKey().setOnAction(new MyAction(entry.getValue()));
+        }
         Controleur.gridPane = vue.getGridPane();
     }
 
@@ -79,9 +90,13 @@ public class Controleur {
         Controleur.vue.dessine();
     }
 
-    public void play(Button indice){
-        Controleur.tab_Etat = concepteur.lectureFichier(indice.getName());
+    public void play(String indice){
+        Controleur.tab_Etat = concepteur.lectureFichier("src/Niveaux/"+indice);
+        System.out.println(indice);
         Controleur.vue = Controleur.bld.creerVue("Jeu");
+        Controleur.gridPane = vue.getGridPane();
+        Controleur.primaryStage.setScene(new Scene(Controleur.gridPane, 800, 400));
+        primaryStage.show();
         Controleur.vue.dessine();
         Controleur.gridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
@@ -89,16 +104,25 @@ public class Controleur {
             public void handle(KeyEvent event) {
                 KeyCode input = event.getCode();
                 Jouer(input);
+                if (Controleur.commande.aGagner()){
+                    Controleur.gridPane.setOnKeyPressed(null);
+                    Controleur.vue = Controleur.bld.creerVue("Fin");
+                    Controleur.gridPane = vue.getGridPane();
+                    Controleur.primaryStage.setScene(new Scene(Controleur.gridPane, 800, 400));
+                    primaryStage.show();
+
+                }
             }
         });
         Controleur.gridPane.requestFocus();
+
     }
 
 
     class MyAction implements EventHandler<ActionEvent> {
-        Button indice;
+        String indice;
 
-        MyAction(Button indice) {
+        MyAction(String indice) {
             this.indice = indice;
         }
 
@@ -146,6 +170,8 @@ public class Controleur {
     public ArrayList<String> getNiveaux(){
         return Controleur.niveaux;
     }
+
+
 
 
 }

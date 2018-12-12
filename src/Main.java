@@ -10,15 +10,14 @@ public class Main extends Application {
 
     // HELLO IM A TEST wesh alors
 
-    private static final int maxWidth = 800;
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         Controleur controleur = Controleur.getInstance();
         controleur.Init();
-        primaryStage.setScene(new Scene(controleur.getGridPane(), maxWidth, 400));
+        primaryStage.setScene(new Scene(controleur.getGridPane(), 800, 400));
         primaryStage.setTitle("Shoqoban");
         primaryStage.show();
+        Controleur.setPrimary(primaryStage);
         //controleur.play();
     }
 
