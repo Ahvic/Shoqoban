@@ -104,7 +104,7 @@ public class Controleur {
 
         @Override
         public void handle(ActionEvent event) {
-            play(indice);
+            Controleur.getInstance().play(indice);
         }
     }
 
