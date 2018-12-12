@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by hadji on 04/12/18.
  */
 public class VueMenu extends Vue{
-    public Map<Button,String> buttonMap;
+    private Map<Button,String> buttonMap;
     public VueMenu() {
         buttonMap = new HashMap<Button,String>();
         Text txt = new Text("Menu");
