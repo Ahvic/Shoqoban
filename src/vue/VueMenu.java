@@ -27,6 +27,7 @@ public class VueMenu extends Vue{
         while (it.hasNext()) {
             i++;
             Button btn = new Button("Niveau " + i);
+
             buttonMap.put(btn,it.next());
             gridPane.add(btn, 1, 4+i);
 
