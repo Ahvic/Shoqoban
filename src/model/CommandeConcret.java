@@ -7,9 +7,14 @@ import java.util.ArrayList;
 
 public class CommandeConcret implements Commande{
 
-    public CommandeConcret(){
-
-    }
+    /**
+     * Va prendre le dernier element de ensInput et va le
+     * transformer en mouvement. Prend en compte si une caisse
+     * doit etre bougee ou non.
+     *
+     * Modifie tab, ensInput et nbUndo du controleur grace au
+     * singleton.
+     */
 
     public void undo(){
         Controleur control = Controleur.getInstance();
@@ -73,6 +78,13 @@ public class CommandeConcret implements Commande{
         }
     }
 
+    /**
+     * Re-execute le dernier undo
+     *
+     * Modifie tab, ensInput et nbUndo du controleur grace au
+     * singleton.
+     */
+
     public void redo(){
         Controleur control = Controleur.getInstance();
 
@@ -89,6 +101,15 @@ public class CommandeConcret implements Commande{
             control.setNbUndo(nbUndo);
         }
     }
+
+    /**
+     * Inverse la direction de la touche donnee
+     * en parametre.
+     * Utilise dans undo.
+     *
+     * @param c la touche a inverser
+     * @return KeyCode la touche inversee
+     */
 
     private KeyCode inversionTouche(KeyCode c){
 
@@ -108,6 +129,14 @@ public class CommandeConcret implements Commande{
         return null;
     }
 
+    /**
+     * Determine si le joueur a gagner sa partie.
+     * Se contente de regarde si il reste une caisse
+     * qui n'est pas dans un trou.
+     *
+     * @return boolean gagner ou non
+     */
+
     public boolean aGagner(){
         Controleur control = Controleur.getInstance();
         char[][] tab = control.getEtat();
@@ -120,6 +149,16 @@ public class CommandeConcret implements Commande{
 
         return true;
     }
+
+    /**
+     * Va modifier le tableau du controlleur pour
+     * faire le mouvement dans la direction donnee en
+     * parametre
+     *
+     * @param c la touche indiquant la direction
+     * @param sansSuppEnsInput indique si il faut supprimer les coup precedent
+     *        un redo ou non
+     */
 
     public void move(KeyCode c, boolean sansSuppEnsInput){
         Controleur control = Controleur.getInstance();
@@ -247,6 +286,14 @@ public class CommandeConcret implements Commande{
         control.setEtat(tab);
         control.setEnsInput(ensInput);
     }
+
+    /**
+     * Transforme la touche rentree en parametre en direction
+     * au format [y,x]
+     *
+     * @param c la touche a convertir
+     * @return in[2] contenant la direction du mouvement au format [y,x]
+     */
 
     private int[] directionJoueur(KeyCode c){
 
