@@ -13,10 +13,8 @@ import model.CommandeConcret;
 import model.Concepteur;
 import vue.BuilderVue;
 import vue.Vue;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
 
@@ -86,7 +84,7 @@ public class Controleur {
 
 
     public void Jouer(KeyCode c){
-        Controleur.commande.move(c, false);//opère une modification sur le tableau
+        Controleur.commande.move(c, false);
         Controleur.vue.dessine();
     }
 
