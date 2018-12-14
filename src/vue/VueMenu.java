@@ -9,11 +9,9 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
-/**
- * Created by hadji on 04/12/18.
- */
+
+
 public class VueMenu extends Vue{
     public VueMenu() {
         buttonMap = new HashMap<Button,String>();

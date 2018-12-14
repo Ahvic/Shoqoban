@@ -1,8 +1,5 @@
 package vue;
 
-/**
- * Created by Calgaryz.
- */
 
 import javafx.scene.image.Image;
 
