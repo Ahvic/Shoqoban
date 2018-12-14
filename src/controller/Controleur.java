@@ -61,14 +61,6 @@ public class Controleur {
         return Controleur.instance;
     }
 
-    public static void setPrimary(Stage primaryStage) {
-        Controleur.primaryStage = primaryStage;
-    }
-
-
-    /*récuperation du tableau, création de vueJeu, utilisation de la méthode afficher de vueJeu
-     * et attente d'une action pour actualiser la vue*/
-
 
     public void Init() throws FileNotFoundException {
         Controleur.niveaux = concepteur.lectureNiveaux();
@@ -131,10 +123,8 @@ public class Controleur {
     }
 
 
-    /*création de vueMenu, affichage*/
-
-    public void Menu(){
-        Controleur.vue = bld.creerVue("Menu");
+    public static void setPrimary(Stage primaryStage) {
+        Controleur.primaryStage = primaryStage;
     }
 
     public GridPane getGridPane(){
@@ -167,6 +157,10 @@ public class Controleur {
 
     public ArrayList<String> getNiveaux(){
         return Controleur.niveaux;
+    }
+
+    public int getNbCoup(){
+        return ensInput.size() - nbUndo;
     }
 
 
