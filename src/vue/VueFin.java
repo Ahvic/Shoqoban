@@ -13,9 +13,6 @@ import javafx.scene.text.Text;
  */
 public class VueFin extends Vue{
 
-    public Button btn;
-
-
     public VueFin(){
         Text txt = new Text("Vous avez gagné, vous êtes très fort, Bravo");
         txt.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));

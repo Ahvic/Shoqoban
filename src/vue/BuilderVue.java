@@ -20,6 +20,8 @@ public class BuilderVue {
             vue = new VueFin();
         }else if(nomVue.equals("NbCoup")){
             vue = new VueNbCoup();
+        }else if(nomVue.equals("UndoRedo")){
+            vue = new VueUndoRedo();
         }
 
         return vue;
