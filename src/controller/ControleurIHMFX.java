@@ -22,9 +22,9 @@ public class ControleurIHMFX {
         this.vueFin = vueFin;
         this.vueNbCoup = vueNbCoup;
 
-        for (Map.Entry<Button, String> entry : vueMenu.getButtonMap().entrySet()) {
-            entry.getKey().setOnAction(new MyAction(entry.getValue()));
-        }
+       // for (Map.Entry<Button, String> entry : vueMenu.getButtonMap().entrySet()) {
+        //    entry.getKey().setOnAction(new MyAction(entry.getValue()));
+        //}
 
         reset = new Button("Reset");
         reset.setOnAction(new ActionReset());

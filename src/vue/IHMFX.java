@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class IHMFX extends Application implements Observateur {
-    VueNbCoup vueNbCoup;
+    Vue vueNbCoup;
     Vue vue;
     BuilderVue bld;
 
@@ -30,7 +30,7 @@ public class IHMFX extends Application implements Observateur {
         vue = bld.creerVue("Jeu");
         ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue);
         vue.gridPane.setAlignment(Pos.CENTER);
-        vueNbCoup= new VueNbCoup();
+        vueNbCoup= bld.creerVue("NbCoup");
         vueNbCoup.label.setAlignment(Pos.CENTER);
 
         /* montage de la scene */
