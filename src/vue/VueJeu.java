@@ -5,9 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-/**
- * Created by Calgaryz on 04/12/18.
- */
 public class VueJeu extends Vue{
 
     private Button[][] myButton;
@@ -46,7 +43,4 @@ public class VueJeu extends Vue{
         }
     }
 
-    public GridPane getGridPane(){
-        return this.gridPane;
-    }
 }
