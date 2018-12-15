@@ -51,4 +51,14 @@ public class Controleur implements Sujet {
     public int getNbCoup() {
         return modele.getNbCoup();
     }
+
+
+    public ArrayList<String> getNiveaux() {
+        return null;
+    }
+
+
+    public char[][] getEtat() {
+        return modele.getTab_Etat();
+    }
 }
