@@ -14,7 +14,9 @@ import javafx.stage.Stage;
 public class IHMFX extends Application implements Observateur {
     Vue vueNbCoup;
     Vue vue;
+    Vue vueMenu;
     BuilderVue bld;
+    Stage primaryStage;
 
     public void actualise(){
         Platform.runLater(new Runnable() {
@@ -27,14 +29,37 @@ public class IHMFX extends Application implements Observateur {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
         Controleur controleur = Controleur.getInstance();
         controleur.abonne(this);
         bld = new BuilderVue();
+        vueMenu = bld.creerVue("Menu");
         vue = bld.creerVue("Jeu");
-        ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue);
+        ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue,vueMenu,this);
+        vue.gridPane.setAlignment(Pos.CENTER);
+        MonteurScene monteurScene = new MonteurScene();
+        Scene scene = monteurScene.
+                setCentre(vueMenu.gridPane).
+                setLargeur(800).
+                setHauteur(200).
+                retourneScene();
+
+        primaryStage.setScene(scene);
+
+        primaryStage.setTitle("Shoqoban");
+        primaryStage.show();
+
+
+    }
+
+    public void play(){
+        Controleur controleur = Controleur.getInstance();
+        controleur.abonne(this);
+        vue = bld.creerVue("Jeu");
+        ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue,vueMenu,this);
         vue.gridPane.setAlignment(Pos.CENTER);
         vueNbCoup= bld.creerVue("NbCoup");
-        vueNbCoup.label.setAlignment(Pos.CENTER);
+        vueNbCoup.gridPane.setAlignment(Pos.CENTER);
 
         /* montage de la scene */
         MonteurScene monteurScene = new MonteurScene();
@@ -42,9 +67,9 @@ public class IHMFX extends Application implements Observateur {
         Scene scene = monteurScene.
                 setCentre(vue.gridPane).
                 ajoutBas(controleurIHMFX.reset).
-                ajoutBas(vueNbCoup.label).
+                ajoutBas(vueNbCoup.gridPane).
                 setLargeur(800).
-                setHauteur(200).
+                setHauteur(400).
                 retourneScene();
 
         primaryStage.setScene(scene);
