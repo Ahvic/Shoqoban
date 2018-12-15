@@ -209,25 +209,11 @@ public class ModeleConcret implements Modele{
         return tab_Etat;
     }
 
-    public static void setTab_Etat(char[][] tab_Etat) {
-        ModeleConcret.tab_Etat = tab_Etat;
-
-        System.out.println("I've been set");
-    }
-
     public Stack<Pair> getInputValide() {
         return inputValide;
     }
 
-    public void setInputValide(Stack<Pair> inputValide) {
-        this.inputValide = inputValide;
-    }
-
     public Stack<Pair> getInputUndo() {
         return inputUndo;
-    }
-
-    public void setInputUndo(Stack<Pair> inputUndo) {
-        this.inputUndo = inputUndo;
     }
 }
