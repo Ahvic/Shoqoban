@@ -1,14 +1,16 @@
+package vue;
+
 import controller.Controleur;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-import vue.BuilderVue;
-import vue.Observateur;
-import vue.Vue;
-import vue.VueNbCoup;
+import javafx.scene.control.Label;
+import vue.*;
 
 public class IHMFX extends Application implements Observateur {
-    VueNbCoup vueNbCoup;
+    Vue vueNbCoup;
     Vue vue;
     BuilderVue bld;
 
@@ -28,9 +30,8 @@ public class IHMFX extends Application implements Observateur {
 
         bld = new BuilderVue();
         vue = bld.creerVue("Menu");
-        ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue);
-        vue.gridPane.setAlignment(Pos.CENTER);
-        vueNbCoup= new VueNbCoupIHMFX(controleur);
+        vue.getGridPane().setAlignment(Pos.CENTER);
+        vueNbCoup= bld.creerVue("NbCoup");
         vueNbCoup.label.setAlignment(Pos.CENTER);
 
         /* montage de la scene */
@@ -38,7 +39,7 @@ public class IHMFX extends Application implements Observateur {
 
         Scene scene = monteurScene.
                 setCentre(vue.gridPane).
-                ajoutBas(controleurIHMFX.reset).
+                ajoutBas(controleur.reset).
                 ajoutBas(vueNbCoup.label).
                 setLargeur(800).
                 setHauteur(200).
@@ -46,7 +47,7 @@ public class IHMFX extends Application implements Observateur {
 
         primaryStage.setScene(scene);
 
-        primaryStage.setTitle("Chameaux");
+        primaryStage.setTitle("Shoqoban");
         primaryStage.show();
     }
 
