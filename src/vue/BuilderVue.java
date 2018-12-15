@@ -18,6 +18,8 @@ public class BuilderVue {
         }
         else if(nomVue.equals("Fin")){
             vue = new VueFin();
+        }else if(nomVue.equals("NbCoup")){
+            vue = new VueNbCoup();
         }
 
         return vue;
