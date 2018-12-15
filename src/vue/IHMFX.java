@@ -36,7 +36,8 @@ public class IHMFX extends Application implements Observateur {
         bld = new BuilderVue();
         vueMenu = bld.creerVue("Menu");
         vue = bld.creerVue("Jeu");
-        ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue,vueMenu,this);
+        vueUndoRedo = bld.creerVue("UndoRedo");
+        ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue,vueMenu,vueUndoRedo,this);
         vue.gridPane.setAlignment(Pos.CENTER);
         MonteurScene monteurScene = new MonteurScene();
         Scene scene = monteurScene.
@@ -57,12 +58,12 @@ public class IHMFX extends Application implements Observateur {
         Controleur controleur = Controleur.getInstance();
         controleur.abonne(this);
         vue = bld.creerVue("Jeu");
-        ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue,vueMenu,this);
+        vueUndoRedo = bld.creerVue("UndoRedo");
+        ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue,vueMenu,vueUndoRedo,this);
         vue.gridPane.setAlignment(Pos.CENTER);
         vueNbCoup= bld.creerVue("NbCoup");
+        vue.gridPane.setAlignment(Pos.CENTER);
         vueNbCoup.gridPane.setAlignment(Pos.CENTER);
-        vueNbCoup.gridPane.setAlignment(Pos.CENTER);
-        vueUndoRedo = bld.creerVue("UndoRedo");
         vueUndoRedo.gridPane.setAlignment(Pos.CENTER);
 
         /* montage de la scene */
