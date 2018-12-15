@@ -1,6 +1,7 @@
 package controller;
 import controller.Sujet;
 import javafx.scene.input.KeyCode;
+import model.FacadeModele;
 import model.ModeleConcret;
 import vue.Observateur;
 
@@ -16,7 +17,7 @@ public class Controleur implements Sujet {
         return singleton;
     }
 
-    ModeleConcret modele;
+    FacadeModele modele;
     ArrayList<Observateur> observateurs = new ArrayList<Observateur>();
 
     private Controleur() {
@@ -44,10 +45,10 @@ public class Controleur implements Sujet {
     }
 
     public void setModele(String s) {
-        this.modele = new ModeleConcret(s);
+        this.modele = new FacadeModele(s);
     }
 
     public int getNbCoup() {
-        return modele.getInputValide().size() - modele.getInputUndo().size();
+        return modele.getNbCoup();
     }
 }

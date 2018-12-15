@@ -51,6 +51,6 @@ public class IHMFX extends Application implements Observateur {
     }
 
     public void lance() {
-        launch(new String[]{});
+        launch();
     }
 }
