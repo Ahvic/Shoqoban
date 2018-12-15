@@ -16,16 +16,28 @@ public class DecoUndoRedo implements Modele{
         return cc.aGagner();
     }
 
-    public void move(KeyCode c) {
-        cc.move(c);
-    }
-
     public void move(KeyCode c, int operation){
         cc.move(c, operation);
     }
 
     public int[] directionJoueur(KeyCode c) {
         return cc.directionJoueur(c);
+    }
+
+    /**
+     * Permet de remettre le tableau et les piles dans
+     * leurs etats initiaux
+     */
+
+    public void reset(){
+
+        int size = cc.getInputValide().size();
+
+        for(int i = 0; i < size; i++) {
+            undo();
+        }
+
+        cc.getInputUndo().clear();
     }
 
     /**

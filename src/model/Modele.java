@@ -20,9 +20,13 @@ public interface Modele {
      * parametre
      *
      * @param c la touche indiquant la direction
+     * @param mode le mode de deplacement
+     *             0 normal
+     *             1 undo
+     *             2 redo
      */
 
-    void move(KeyCode c);
+    void move(KeyCode c, int mode);
 
     /**
      * Transforme la touche rentree en parametre en direction
