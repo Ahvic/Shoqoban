@@ -46,4 +46,8 @@ public class Controleur implements Sujet {
     public void setModele(String s) {
         this.modele = new ModeleConcret(s);
     }
+
+    public int getNbCoup() {
+        return modele.getInputValide().size() - modele.getInputUndo().size();
+    }
 }
