@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 
 public class VueNbCoup extends Vue{
 
-    Label label = new Label("0");
+    public Label label = new Label("0");
 
     public void dessine() {
         label.setText(Controleur.getInstance().getNbCoup()+"");

@@ -1,169 +1,49 @@
 package controller;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import controller.Sujet;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.util.Pair;
-import model.CommandeConcret;
-import model.Concepteur;
-import vue.BuilderVue;
-import vue.Vue;
-import java.io.FileNotFoundException;
+import model.ModeleConcret;
+import vue.Observateur;
+
 import java.util.ArrayList;
-import java.util.Map;
 
+public class Controleur implements Sujet {
+    private static Controleur singleton;
 
-public class Controleur {
-
-    private static Controleur instance = null;
-
-    private static Concepteur concepteur;
-
-    private static CommandeConcret commande;
-
-    private static BuilderVue bld;
-
-    private static GridPane gridPane;
-
-    private static char[][] tab_Etat;
-
-    private static Vue vue;
-
-    private static ArrayList<Pair> ensInput;
-
-    private static int nbUndo;
-
-    private static Stage primaryStage;
-
-    private static ArrayList<String> niveaux;
-
-
-    /*Constructeur privé*/
-    private Controleur(){
-        Controleur.concepteur = new Concepteur();
-        Controleur.commande = new CommandeConcret();
-        Controleur.ensInput = new ArrayList<>();
-        Controleur.bld = new BuilderVue();
-    }
-
-
-    /*getInstance du singleton */
 
     public static Controleur getInstance() {
-        if(Controleur.instance == null){
-            Controleur.instance = new Controleur();
-        }
-        return Controleur.instance;
+        if (singleton == null)
+            singleton = new Controleur();
+        return singleton;
     }
 
+    ModeleConcret modele;
+    ArrayList<Observateur> observateurs = new ArrayList<Observateur>();
 
-    public void Init() throws FileNotFoundException {
-        Controleur.niveaux = concepteur.lectureNiveaux();
-        // Controleur.tab_Etat = concepteur.lectureFichier("Niveaux/sokoban01.xsb");
-        // System.out.println(tab_Etat[0][0]);
-        Controleur.vue = Controleur.bld.creerVue("Menu");
-        for (Map.Entry<Button, String> entry : Controleur.vue.getButtonMap().entrySet()) {
-            entry.getKey().setOnAction(new MyAction(entry.getValue()));
-        }
-        Controleur.gridPane = vue.getGridPane();
-    }
-
-
-
-    public void Jouer(KeyCode c){
-        Controleur.commande.move(c, false);
-        Controleur.vue.dessine();
-    }
-
-    public void play(String indice){
-        Controleur.tab_Etat = concepteur.lectureFichier("src/Niveaux/"+indice);
-        System.out.println(indice);
-        Controleur.vue = Controleur.bld.creerVue("Jeu");
-        Controleur.gridPane = vue.getGridPane();
-        Controleur.primaryStage.setScene(new Scene(Controleur.gridPane, 800, 400));
-        primaryStage.show();
-        Controleur.vue.dessine();
-        Controleur.gridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-
-            public void handle(KeyEvent event) {
-                KeyCode input = event.getCode();
-                Jouer(input);
-                if (Controleur.commande.aGagner()){
-                    Controleur.gridPane.setOnKeyPressed(null);
-                    Controleur.vue = Controleur.bld.creerVue("Fin");
-                    Controleur.gridPane = vue.getGridPane();
-                    Controleur.primaryStage.setScene(new Scene(Controleur.gridPane, 800, 400));
-                    primaryStage.show();
-
-                }
-            }
-        });
-        Controleur.gridPane.requestFocus();
+    private Controleur() {
 
     }
 
-
-    class MyAction implements EventHandler<ActionEvent> {
-        String indice;
-
-        MyAction(String indice) {
-            this.indice = indice;
-        }
-
-        @Override
-        public void handle(ActionEvent event) {
-            Controleur.getInstance().play(indice);
-        }
+    public void abonne(Observateur observateur) {
+        observateurs.add(observateur);
     }
 
 
-    public static void setPrimary(Stage primaryStage) {
-        Controleur.primaryStage = primaryStage;
+    public void notifie() {
+        for (Observateur observateur:observateurs)
+            observateur.actualise();
     }
 
-    public GridPane getGridPane(){
-        return vue.getGridPane();
+    public void move(KeyCode x) {
+        modele.move(x);
+        notifie();
     }
 
-    public char[][] getEtat(){
-        return Controleur.tab_Etat;
+    public void reset() {
+        modele.reset();
+        notifie();
     }
 
-    public void setEtat(char[][] tab){
-        Controleur.tab_Etat = tab;
+    public void setModele(String s) {
+        this.modele = new ModeleConcret(s);
     }
-
-    public ArrayList<Pair> getEnsInput(){
-        return Controleur.ensInput;
-    }
-
-    public void setEnsInput(ArrayList<Pair> a){
-        Controleur.ensInput = a;
-    }
-
-    public int getNbUndo(){
-        return Controleur.nbUndo;
-    }
-
-    public void setNbUndo(int a){
-        Controleur.nbUndo = a;
-    }
-
-    public ArrayList<String> getNiveaux(){
-        return Controleur.niveaux;
-    }
-
-    public int getNbCoup(){
-        return ensInput.size() - nbUndo;
-    }
-
-
-
-
 }
