@@ -40,15 +40,6 @@ public class ModeleConcret implements Modele{
     }
 
     /**
-     * Move utilise hors des fonction undo/redo
-     * @param c la touche indiquant la direction
-     */
-
-    public void move(KeyCode c){
-        move(c, 0);
-    }
-
-    /**
      * Va modifier le tableau du controlleur pour
      * faire le mouvement dans la direction donnee en
      * parametre
@@ -167,8 +158,10 @@ public class ModeleConcret implements Modele{
             }
         }
 
-        if(operation == 0 || operation == 2)
-            inputValide.add(mouvement);
+        if(operation == 0 || operation == 2) {
+            if(mouvement.getKey() != null)
+                inputValide.add(mouvement);
+        }
     }
 
     /**

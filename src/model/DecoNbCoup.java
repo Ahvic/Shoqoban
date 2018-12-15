@@ -14,8 +14,8 @@ public class DecoNbCoup implements Modele {
         return cc.aGagner();
     }
 
-    public void move(KeyCode c) {
-        cc.move(c);
+    public void move(KeyCode c, int mode) {
+        cc.move(c, mode);
     }
 
     public int[] directionJoueur(KeyCode c) {
