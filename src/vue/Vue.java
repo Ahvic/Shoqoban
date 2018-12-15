@@ -3,6 +3,7 @@ package vue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
@@ -11,9 +12,9 @@ import java.util.Map;
 
 public abstract class Vue {
 
-    protected GridPane gridPane = new GridPane();
-    protected Map<Button,String> buttonMap;
-
+    GridPane gridPane = new GridPane();
+    Map<Button,String> buttonMap;
+    public Label label;
 
     public GridPane getGridPane(){
         return this.gridPane;

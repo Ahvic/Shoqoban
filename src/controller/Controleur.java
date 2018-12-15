@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 public class Controleur implements Sujet {
     private static Controleur singleton;
-
+    FacadeModele modele;
+    ArrayList<Observateur> observateurs = new ArrayList<Observateur>();
 
     public static Controleur getInstance() {
         if (singleton == null)
@@ -17,11 +18,10 @@ public class Controleur implements Sujet {
         return singleton;
     }
 
-    FacadeModele modele;
-    ArrayList<Observateur> observateurs = new ArrayList<Observateur>();
+
 
     private Controleur() {
-
+        this.modele = new FacadeModele("src/Niveaux/sokoban01.xsb");
     }
 
     public void abonne(Observateur observateur) {
@@ -47,7 +47,9 @@ public class Controleur implements Sujet {
     public void setModele(String s) {
         this.modele = new FacadeModele(s);
     }
-
+    public char[][] getEtat(){
+        return modele.getTab_Etat();
+    }
     public int getNbCoup() {
         return modele.getNbCoup();
     }

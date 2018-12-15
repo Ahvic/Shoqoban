@@ -65,7 +65,7 @@ public class Concepteur {
         }
         return null;
     }
-    public ArrayList lectureNiveaux() throws FileNotFoundException {
+    public static ArrayList lectureNiveaux() throws FileNotFoundException {
         ArrayList<String> niveaux = new ArrayList<String>();
         File repertoire = new File("src/Niveaux");
         String [] listefichiers;
