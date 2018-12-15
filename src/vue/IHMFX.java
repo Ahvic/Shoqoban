@@ -72,7 +72,6 @@ public class IHMFX extends Application implements Observateur {
                 setCentre(vue.gridPane).
                 ajoutBas(controleurIHMFX.reset).
                 ajoutBas(vueNbCoup.gridPane).
-                ajoutBas(vueNbCoup.gridPane).
                 ajoutBas(vueUndoRedo.gridPane).
                 setLargeur(800).
                 setHauteur(400).
