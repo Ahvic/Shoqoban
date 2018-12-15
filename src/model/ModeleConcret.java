@@ -12,10 +12,10 @@ public class ModeleConcret implements Modele{
     private Stack<Pair> inputValide;
     private Stack<Pair> inputUndo;
 
-    public ModeleConcret(){
+    public ModeleConcret(String nomTableau){
         Concepteur c = new Concepteur();
 
-        tab_Etat = c.lectureFichier("Level1.xsb");
+        tab_Etat = c.lectureFichier(nomTableau);
         inputValide = new Stack<>();
         inputUndo = new Stack<>();
     }
