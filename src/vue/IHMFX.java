@@ -13,7 +13,9 @@ import javafx.stage.Stage;
 
 public class IHMFX extends Application implements Observateur {
     Vue vueNbCoup;
+    Vue vueUndoRedo;
     Vue vue;
+
     BuilderVue bld;
 
     public void actualise(){
@@ -34,7 +36,9 @@ public class IHMFX extends Application implements Observateur {
         ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue);
         vue.gridPane.setAlignment(Pos.CENTER);
         vueNbCoup= bld.creerVue("NbCoup");
-        vueNbCoup.label.setAlignment(Pos.CENTER);
+        vueNbCoup.gridPane.setAlignment(Pos.CENTER);
+        vueUndoRedo = bld.creerVue("UndoRedo");
+        vueUndoRedo.gridPane.setAlignment(Pos.CENTER);
 
         /* montage de la scene */
         MonteurScene monteurScene = new MonteurScene();
@@ -42,9 +46,10 @@ public class IHMFX extends Application implements Observateur {
         Scene scene = monteurScene.
                 setCentre(vue.gridPane).
                 ajoutBas(controleurIHMFX.reset).
-                ajoutBas(vueNbCoup.label).
+                ajoutBas(vueNbCoup.gridPane).
+                ajoutBas(vueUndoRedo.gridPane).
                 setLargeur(800).
-                setHauteur(200).
+                setHauteur(400).
                 retourneScene();
 
         primaryStage.setScene(scene);

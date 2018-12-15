@@ -14,7 +14,6 @@ public abstract class Vue {
 
     GridPane gridPane = new GridPane();
     Map<Button,String> buttonMap;
-    public Label label;
 
     public GridPane getGridPane(){
         return this.gridPane;
