@@ -59,8 +59,4 @@ public class Controleur implements Sujet {
         return null;
     }
 
-
-    public char[][] getEtat() {
-        return modele.getTab_Etat();
-    }
 }

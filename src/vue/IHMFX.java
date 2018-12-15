@@ -4,8 +4,11 @@ import controller.Controleur;
 import controller.ControleurIHMFX;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class IHMFX extends Application implements Observateur {
@@ -48,6 +51,14 @@ public class IHMFX extends Application implements Observateur {
 
         primaryStage.setTitle("Shoqoban");
         primaryStage.show();
+
+        vue.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent event) {
+                KeyCode input = event.getCode();
+                controleur.move(input);
+            }
+        });
+        vue.getGridPane().requestFocus();
     }
 
     public void lance() {
