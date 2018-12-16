@@ -135,17 +135,15 @@ public class DecoUndoRedo implements Modele{
 
     private KeyCode inversionTouche(KeyCode c){
 
-        if(c.isArrowKey()) {
-            switch (c.getName()) {
-                case "Left":
-                    return KeyCode.valueOf("RIGHT");
-                case "Right":
-                    return KeyCode.valueOf("LEFT");
-                case "Up":
-                    return KeyCode.valueOf("DOWN");
-                case "Down":
-                    return KeyCode.valueOf("UP");
-            }
+        switch (c.getName()) {
+            case "Q":
+                return KeyCode.valueOf("D");
+            case "D":
+                return KeyCode.valueOf("Q");
+            case "Z":
+                return KeyCode.valueOf("S");
+            case "S":
+                return KeyCode.valueOf("Z");
         }
 
         return null;
