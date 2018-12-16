@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class IHMFX extends Application implements Observateur {
     Vue vueNbCoup;
     Vue vueUndoRedo;
+    Vue vueRejouer;
     Vue vue;
     Vue vueMenu;
     BuilderVue bld;
@@ -59,6 +60,7 @@ public class IHMFX extends Application implements Observateur {
         controleur.abonne(this);
         vue = bld.creerVue("Jeu");
         vueUndoRedo = bld.creerVue("UndoRedo");
+        vueRejouer = bld.creerVue("Rejouer");
         ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue,vueMenu,vueUndoRedo,this);
         vueNbCoup= bld.creerVue("NbCoup");
         vue.gridPane.setAlignment(Pos.CENTER);
@@ -73,6 +75,7 @@ public class IHMFX extends Application implements Observateur {
                 ajoutBas(controleurIHMFX.reset).
                 ajoutBas(vueNbCoup.gridPane).
                 ajoutBas(vueUndoRedo.gridPane).
+                ajoutBas(vueRejouer.gridPane).
                 setLargeur(800).
                 setHauteur(400).
                 retourneScene();
