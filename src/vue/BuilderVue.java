@@ -23,9 +23,6 @@ public class BuilderVue {
         }else if(nomVue.equals("UndoRedo")){
             vue = new VueUndoRedo();
         }
-        else if(nomVue.equals("Rejouer")){
-            vue = new VueRejouer();
-        }
 
         return vue;
     }

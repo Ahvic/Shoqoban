@@ -2,7 +2,6 @@ package model;
 
 import javafx.scene.input.KeyCode;
 import javafx.util.Pair;
-import vue.IHMFX;
 
 import java.util.Stack;
 
@@ -48,7 +47,4 @@ public class FacadeModele {
         dUR.reset();
     }
 
-    public void replay(IHMFX ih){
-        dUR.replay(ih);
-    }
 }
