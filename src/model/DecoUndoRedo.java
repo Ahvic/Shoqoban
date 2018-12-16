@@ -137,12 +137,16 @@ public class DecoUndoRedo implements Modele{
 
         switch (c.getName()) {
             case "Q":
+            case "Left":
                 return KeyCode.valueOf("D");
             case "D":
+            case "Right":
                 return KeyCode.valueOf("Q");
             case "Z":
+            case "Up":
                 return KeyCode.valueOf("S");
             case "S":
+            case "Down":
                 return KeyCode.valueOf("Z");
         }
 

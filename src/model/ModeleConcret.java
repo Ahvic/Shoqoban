@@ -178,15 +178,19 @@ public class ModeleConcret implements Modele{
 
         switch (c.getName()) {
             case "Q":
+            case "Left":
                 res[1] = -1;
                 break;
             case "D":
+            case "Right":
                 res[1] = 1;
                 break;
             case "Z":
+            case "Up":
                 res[0] = -1;
                 break;
             case "S":
+            case "Down":
                 res[0] = 1;
                 break;
         }
