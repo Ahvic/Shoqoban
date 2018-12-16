@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Controleur implements Sujet {
     private static Controleur singleton;
-    FacadeModele modele;
+    public FacadeModele modele;
     ArrayList<Observateur> observateurs = new ArrayList<Observateur>();
 
     public static Controleur getInstance() {

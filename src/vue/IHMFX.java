@@ -60,7 +60,6 @@ public class IHMFX extends Application implements Observateur {
         vue = bld.creerVue("Jeu");
         vueUndoRedo = bld.creerVue("UndoRedo");
         ControleurIHMFX controleurIHMFX = new ControleurIHMFX(controleur,vue,vueMenu,vueUndoRedo,this);
-        vue.gridPane.setAlignment(Pos.CENTER);
         vueNbCoup= bld.creerVue("NbCoup");
         vue.gridPane.setAlignment(Pos.CENTER);
         vueNbCoup.gridPane.setAlignment(Pos.CENTER);
@@ -87,9 +86,24 @@ public class IHMFX extends Application implements Observateur {
             public void handle(KeyEvent event) {
                 KeyCode input = event.getCode();
                 controleur.move(input);
+                if(controleur.modele.aGagner()){
+                    vue.getGridPane().setOnKeyPressed(null);
+                    MonteurScene monteurScene = new MonteurScene();
+                    Scene scene = monteurScene.
+                            setCentre(vueMenu.gridPane).
+                            setLargeur(800).
+                            setHauteur(200).
+                            retourneScene();
+
+                    primaryStage.setScene(scene);
+
+                    primaryStage.setTitle("Shoqoban");
+                    primaryStage.show();
+                }
             }
         });
         vue.getGridPane().requestFocus();
+
     }
 
     public void lance() {
