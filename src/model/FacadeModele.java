@@ -46,4 +46,14 @@ public class FacadeModele {
     public void reset(){
         dUR.reset();
     }
+
+    //A SUPPRIMER SEULEMENT POUR TEST
+
+    public Stack<Pair> getInputValide(){
+        return mc.getInputValide();
+    }
+
+    public Stack<Pair> getInputUndo(){
+        return mc.getInputUndo();
+    }
 }

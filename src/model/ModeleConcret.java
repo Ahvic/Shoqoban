@@ -176,21 +176,19 @@ public class ModeleConcret implements Modele{
 
         int[] res = {0,0};
 
-        if(c.isArrowKey()) {
-            switch (c.getName()) {
-                case "Left":
-                    res[1] = -1;
-                    break;
-                case "Right":
-                    res[1] = 1;
-                    break;
-                case "Up":
-                    res[0] = -1;
-                    break;
-                case "Down":
-                    res[0] = 1;
-                    break;
-            }
+        switch (c.getName()) {
+            case "Q":
+                res[1] = -1;
+                break;
+            case "D":
+                res[1] = 1;
+                break;
+            case "Z":
+                res[0] = -1;
+                break;
+            case "S":
+                res[0] = 1;
+                break;
         }
 
         return res;
