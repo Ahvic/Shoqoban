@@ -25,6 +25,32 @@ public class DecoUndoRedo implements Modele{
     }
 
     /**
+     * Rejoue l'ensemble des inputs valides
+     */
+
+    public void replay(){
+
+        Stack<Pair> copieInputValide = cc.getInputValide();
+        int size = copieInputValide.size();
+
+        reset();
+
+        for(int i = 0; i < size; i++){
+            KeyCode act = (KeyCode)cc.getInputValide().get(i).getKey();
+
+            move(act, 0);
+
+            try {
+                Thread.sleep(200L);
+            }catch (InterruptedException c){
+                System.out.println(c);
+            }
+        }
+
+
+    }
+
+    /**
      * Permet de remettre le tableau et les piles dans
      * leurs etats initiaux
      */
