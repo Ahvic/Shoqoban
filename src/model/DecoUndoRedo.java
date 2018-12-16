@@ -2,6 +2,8 @@ package model;
 
 import javafx.util.Pair;
 import javafx.scene.input.KeyCode;
+import vue.IHMFX;
+
 import java.util.Stack;
 
 public class DecoUndoRedo implements Modele{
@@ -28,7 +30,7 @@ public class DecoUndoRedo implements Modele{
      * Rejoue l'ensemble des inputs valides
      */
 
-    public void replay(){
+    public void replay(IHMFX ih){
 
         Stack<Pair> copieInputValide = cc.getInputValide();
         int size = copieInputValide.size();

@@ -47,9 +47,11 @@ public class Controleur implements Sujet {
     public void setModele(String s) {
         this.modele = new FacadeModele(s);
     }
+
     public char[][] getEtat(){
         return modele.getTab_Etat();
     }
+
     public int getNbCoup() {
         return modele.getNbCoup();
     }

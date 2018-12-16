@@ -2,6 +2,7 @@ package model;
 
 import javafx.scene.input.KeyCode;
 import javafx.util.Pair;
+import vue.IHMFX;
 
 import java.util.Stack;
 
@@ -47,13 +48,7 @@ public class FacadeModele {
         dUR.reset();
     }
 
-    //A SUPPRIMER SEULEMENT POUR TEST
-
-    public Stack<Pair> getInputValide(){
-        return mc.getInputValide();
-    }
-
-    public Stack<Pair> getInputUndo(){
-        return mc.getInputUndo();
+    public void replay(IHMFX ih){
+        dUR.replay(ih);
     }
 }

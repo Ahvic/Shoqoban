@@ -13,6 +13,6 @@ public class VueNbCoup extends Vue{
     }
 
     public void dessine() {
-        label.setText(Controleur.getInstance().getNbCoup()+"");
+        label.setText(Controleur.getInstance().getNbCoup() + "");
     }
 }
